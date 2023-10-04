@@ -13,6 +13,9 @@ final class Episodio {
     let id: Int
     let title: String
     let content: String
+    var played: Bool = false
+    var favorite: Bool = false
+    var comments: String = ""
     
     init(id: Int = 0, title: String = "", content: String = "") {
         self.id = id

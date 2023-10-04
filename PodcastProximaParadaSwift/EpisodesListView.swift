@@ -17,16 +17,20 @@ struct EpisodesListView: View {
         NavigationStack {
             List {
                 ForEach(episodes) { episode in
-                    VStack(alignment: .leading) {
-                        Text(episode.title)
-                            .font(.headline)
-                        Text(episode.content)
-                            .lineLimit(10)
-                            .font(.caption2)
-                        
+                    NavigationLink(value: episode) {
+                        VStack(alignment: .leading) {
+                            Text(episode.title)
+                                .font(.headline)
+                            Text(episode.content)
+                                .lineLimit(10)
+                                .font(.caption2)
+                        }
                     }
                 }
                 .onDelete(perform: deleteItems)
+            }
+            .navigationDestination(for: Episodio.self) { value in
+                EpisodeDetailView(episode: value)
             }
             
             .navigationTitle("Episodes")
