@@ -20,7 +20,7 @@ struct EpisodeDetailView: View {
         List {
             Toggle("Escuchado", isOn: $episode.played)
             Toggle("Favorito", isOn: $episode.favorite)
-            
+                .disabled(!episode.played)
             TextEditor(text: $episode.comments)
                 .frame(height: 200)
                 .background(RoundedRectangle(cornerRadius: 10).stroke().foregroundStyle(Color.secondary).padding(-5))

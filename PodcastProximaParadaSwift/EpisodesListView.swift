@@ -19,8 +19,20 @@ struct EpisodesListView: View {
                 ForEach(episodes) { episode in
                     NavigationLink(value: episode) {
                         VStack(alignment: .leading) {
+                          
                             Text(episode.title)
                                 .font(.headline)
+                            HStack{
+                         
+                                ZStack {
+                                    Image(systemName: "hearingdevice.ear")
+                                    Image(systemName: episode.played  ? "line.diagonal" : "")
+                                        
+                                }
+                                .foregroundStyle(episode.played ? Color.green : Color.red)
+                                Image(systemName: episode.favorite ? "heart" : "heart.slash")
+                                    .foregroundStyle(episode.favorite ? Color.red : Color.gray)
+                            }
                             Text(episode.content)
                                 .lineLimit(10)
                                 .font(.caption2)
