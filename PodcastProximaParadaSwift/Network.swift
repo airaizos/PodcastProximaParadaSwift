@@ -10,12 +10,16 @@ import Foundation
 
 final class Network {
     
-    var session: URLSession
-    var urls: URLDestination
+    let session: URLSession
+    let urls: URLDestination
+    let decoder: JSONDecoder
     
-    init(session: URLSession = URLSession.shared, urls: URLDestination) {
+    init(session: URLSession = URLSession.shared, urls: URLDestination = URLProduction(), decoder: JSONDecoder = JSONDecoder()) {
         self.session = session
         self.urls = urls
+        
+        decoder.dateDecodingStrategy = .iso8601
+        self.decoder = decoder
     }
     
     func fetchJson<JSON:Codable>(url: URL, type: JSON.Type) async throws -> JSON {
@@ -24,7 +28,8 @@ final class Network {
         switch res.statusCode == 200 {
         case true:
             do {
-                return try JSONDecoder().decode(JSON.self, from: data)
+                
+                return try decoder.decode(JSON.self, from: data)
                 
             } catch {
                 throw NSError(domain: "JSON decoder error", code: 2)

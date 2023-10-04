@@ -6,14 +6,29 @@
 //
 
 import Foundation
+import SwiftData
 
-final class Episodio: Codable {
+@Model
+final class Episodio {
+    let id: Int
+    let title: String
+    let content: String
+    
+    init(id: Int = 0, title: String = "", content: String = "") {
+        self.id = id
+        self.title = title
+        self.content = content
+    }
+    
+}
+
+struct APIEpisodio: Codable {
     let id: Int
     let title: Rendered
-    let guid: Rendered
     let content: Rendered
     
     struct Rendered: Codable {
         let rendered: String
     }
 }
+
