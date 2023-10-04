@@ -53,6 +53,7 @@
 		3A4974822ACD5272005890E5 /* PodcastProximaParadaSwift */ = {
 			isa = PBXGroup;
 			children = (
+				3A4974932ACD5313005890E5 /* Model */,
 				3A4974832ACD5272005890E5 /* PodcastProximaParadaSwiftApp.swift */,
 				3A4974852ACD5272005890E5 /* ContentView.swift */,
 				3A4974872ACD5272005890E5 /* Item.swift */,
@@ -68,6 +69,13 @@
 				3A49748C2ACD5273005890E5 /* Preview Assets.xcassets */,
 			);
 			path = "Preview Content";
+			sourceTree = "<group>";
+		};
+		3A4974932ACD5313005890E5 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Model;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
