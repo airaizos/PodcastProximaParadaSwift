@@ -8,5 +8,5 @@
 import Foundation
 
 extension URL {
-    static let episodes = URL(string:"https://proximaparadaswift.dev/wp-json/wp/v2/posts?per_page=100")!
+    static let episodes = URL(string:"https://proximaparadaswift.dev/wp-json/wp/v2/posts?per_page=5")!
 }

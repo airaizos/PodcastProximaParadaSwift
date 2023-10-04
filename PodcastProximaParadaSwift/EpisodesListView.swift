@@ -21,12 +21,14 @@ struct EpisodesListView: View {
                         Text(episode.title)
                             .font(.headline)
                         Text(episode.content)
-                            .lineLimit(3)
+                            .lineLimit(10)
                             .font(.caption2)
                         
                     }
                 }
+                .onDelete(perform: deleteItems)
             }
+            
             .navigationTitle("Episodes")
             .toolbar {
                 Button("Get Episodes") {
@@ -38,7 +40,27 @@ struct EpisodesListView: View {
                     }
                 }
                 .disabled(!episodes.isEmpty)
+                
+                Button {
+                    deleteAllItems()
+                } label: {
+                    Image(systemName: "trash")
+                        .foregroundStyle(.red)
+                }
             }
+        }
+    }
+    
+    func deleteItems(_ indexSet: IndexSet) {
+        for index in indexSet {
+            let item = episodes[index]
+            context.delete(item)
+        }
+    }
+    
+    func deleteAllItems() {
+        for episode in episodes {
+            context.delete(episode)
         }
     }
 }
