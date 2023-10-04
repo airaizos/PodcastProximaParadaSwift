@@ -12,7 +12,22 @@
 		3A4974882ACD5272005890E5 /* Item.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A4974872ACD5272005890E5 /* Item.swift */; };
 		3A49748A2ACD5273005890E5 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3A4974892ACD5273005890E5 /* Assets.xcassets */; };
 		3A49748D2ACD5273005890E5 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3A49748C2ACD5273005890E5 /* Preview Assets.xcassets */; };
+		3A4974962ACD5348005890E5 /* Episode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A4974952ACD5348005890E5 /* Episode.swift */; };
+		3A49749A2ACD53BC005890E5 /* Interface.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A4974992ACD53BC005890E5 /* Interface.swift */; };
+		3A49749D2ACD5422005890E5 /* Network.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A49749C2ACD5422005890E5 /* Network.swift */; };
+		3A49749F2ACD54C6005890E5 /* URLProduction.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A49749E2ACD54C6005890E5 /* URLProduction.swift */; };
+		3A4974A72ACD56C6005890E5 /* PodcastProximaParadaSwiftTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A4974A62ACD56C6005890E5 /* PodcastProximaParadaSwiftTests.swift */; };
 /* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		3A4974A82ACD56C6005890E5 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 3A4974782ACD5272005890E5 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 3A49747F2ACD5272005890E5;
+			remoteInfo = PodcastProximaParadaSwift;
+		};
+/* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
 		3A4974802ACD5272005890E5 /* PodcastProximaParadaSwift.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PodcastProximaParadaSwift.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -21,10 +36,23 @@
 		3A4974872ACD5272005890E5 /* Item.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Item.swift; sourceTree = "<group>"; };
 		3A4974892ACD5273005890E5 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		3A49748C2ACD5273005890E5 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
+		3A4974952ACD5348005890E5 /* Episode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Episode.swift; sourceTree = "<group>"; };
+		3A4974992ACD53BC005890E5 /* Interface.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Interface.swift; sourceTree = "<group>"; };
+		3A49749C2ACD5422005890E5 /* Network.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Network.swift; sourceTree = "<group>"; };
+		3A49749E2ACD54C6005890E5 /* URLProduction.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLProduction.swift; sourceTree = "<group>"; };
+		3A4974A42ACD56C6005890E5 /* PodcastProximaParadaSwiftTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = PodcastProximaParadaSwiftTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		3A4974A62ACD56C6005890E5 /* PodcastProximaParadaSwiftTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PodcastProximaParadaSwiftTests.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
 		3A49747D2ACD5272005890E5 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		3A4974A12ACD56C6005890E5 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -38,6 +66,7 @@
 			isa = PBXGroup;
 			children = (
 				3A4974822ACD5272005890E5 /* PodcastProximaParadaSwift */,
+				3A4974A52ACD56C6005890E5 /* PodcastProximaParadaSwiftTests */,
 				3A4974812ACD5272005890E5 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -46,6 +75,7 @@
 			isa = PBXGroup;
 			children = (
 				3A4974802ACD5272005890E5 /* PodcastProximaParadaSwift.app */,
+				3A4974A42ACD56C6005890E5 /* PodcastProximaParadaSwiftTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -53,6 +83,8 @@
 		3A4974822ACD5272005890E5 /* PodcastProximaParadaSwift */ = {
 			isa = PBXGroup;
 			children = (
+				3A49749B2ACD5419005890E5 /* Network */,
+				3A4974982ACD5393005890E5 /* Interface */,
 				3A4974932ACD5313005890E5 /* Model */,
 				3A4974832ACD5272005890E5 /* PodcastProximaParadaSwiftApp.swift */,
 				3A4974852ACD5272005890E5 /* ContentView.swift */,
@@ -74,8 +106,34 @@
 		3A4974932ACD5313005890E5 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				3A4974952ACD5348005890E5 /* Episode.swift */,
 			);
 			name = Model;
+			sourceTree = "<group>";
+		};
+		3A4974982ACD5393005890E5 /* Interface */ = {
+			isa = PBXGroup;
+			children = (
+				3A4974992ACD53BC005890E5 /* Interface.swift */,
+			);
+			name = Interface;
+			sourceTree = "<group>";
+		};
+		3A49749B2ACD5419005890E5 /* Network */ = {
+			isa = PBXGroup;
+			children = (
+				3A49749C2ACD5422005890E5 /* Network.swift */,
+				3A49749E2ACD54C6005890E5 /* URLProduction.swift */,
+			);
+			name = Network;
+			sourceTree = "<group>";
+		};
+		3A4974A52ACD56C6005890E5 /* PodcastProximaParadaSwiftTests */ = {
+			isa = PBXGroup;
+			children = (
+				3A4974A62ACD56C6005890E5 /* PodcastProximaParadaSwiftTests.swift */,
+			);
+			path = PodcastProximaParadaSwiftTests;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -98,6 +156,24 @@
 			productReference = 3A4974802ACD5272005890E5 /* PodcastProximaParadaSwift.app */;
 			productType = "com.apple.product-type.application";
 		};
+		3A4974A32ACD56C6005890E5 /* PodcastProximaParadaSwiftTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 3A4974AA2ACD56C6005890E5 /* Build configuration list for PBXNativeTarget "PodcastProximaParadaSwiftTests" */;
+			buildPhases = (
+				3A4974A02ACD56C6005890E5 /* Sources */,
+				3A4974A12ACD56C6005890E5 /* Frameworks */,
+				3A4974A22ACD56C6005890E5 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				3A4974A92ACD56C6005890E5 /* PBXTargetDependency */,
+			);
+			name = PodcastProximaParadaSwiftTests;
+			productName = PodcastProximaParadaSwiftTests;
+			productReference = 3A4974A42ACD56C6005890E5 /* PodcastProximaParadaSwiftTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -110,6 +186,10 @@
 				TargetAttributes = {
 					3A49747F2ACD5272005890E5 = {
 						CreatedOnToolsVersion = 15.0;
+					};
+					3A4974A32ACD56C6005890E5 = {
+						CreatedOnToolsVersion = 15.0;
+						TestTargetID = 3A49747F2ACD5272005890E5;
 					};
 				};
 			};
@@ -127,6 +207,7 @@
 			projectRoot = "";
 			targets = (
 				3A49747F2ACD5272005890E5 /* PodcastProximaParadaSwift */,
+				3A4974A32ACD56C6005890E5 /* PodcastProximaParadaSwiftTests */,
 			);
 		};
 /* End PBXProject section */
@@ -141,6 +222,13 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		3A4974A22ACD56C6005890E5 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
@@ -149,12 +237,32 @@
 			buildActionMask = 2147483647;
 			files = (
 				3A4974862ACD5272005890E5 /* ContentView.swift in Sources */,
+				3A49749F2ACD54C6005890E5 /* URLProduction.swift in Sources */,
+				3A49749A2ACD53BC005890E5 /* Interface.swift in Sources */,
+				3A49749D2ACD5422005890E5 /* Network.swift in Sources */,
+				3A4974962ACD5348005890E5 /* Episode.swift in Sources */,
 				3A4974882ACD5272005890E5 /* Item.swift in Sources */,
 				3A4974842ACD5272005890E5 /* PodcastProximaParadaSwiftApp.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		3A4974A02ACD56C6005890E5 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				3A4974A72ACD56C6005890E5 /* PodcastProximaParadaSwiftTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		3A4974A92ACD56C6005890E5 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 3A49747F2ACD5272005890E5 /* PodcastProximaParadaSwift */;
+			targetProxy = 3A4974A82ACD56C6005890E5 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
 
 /* Begin XCBuildConfiguration section */
 		3A49748E2ACD5273005890E5 /* Debug */ = {
@@ -334,6 +442,42 @@
 			};
 			name = Release;
 		};
+		3A4974AB2ACD56C6005890E5 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 6SPUJN2479;
+				GENERATE_INFOPLIST_FILE = YES;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = dev.adrianiraizos.PodcastProximaParadaSwiftTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/PodcastProximaParadaSwift.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/PodcastProximaParadaSwift";
+			};
+			name = Debug;
+		};
+		3A4974AC2ACD56C6005890E5 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 6SPUJN2479;
+				GENERATE_INFOPLIST_FILE = YES;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = dev.adrianiraizos.PodcastProximaParadaSwiftTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/PodcastProximaParadaSwift.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/PodcastProximaParadaSwift";
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -351,6 +495,15 @@
 			buildConfigurations = (
 				3A4974912ACD5273005890E5 /* Debug */,
 				3A4974922ACD5273005890E5 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		3A4974AA2ACD56C6005890E5 /* Build configuration list for PBXNativeTarget "PodcastProximaParadaSwiftTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				3A4974AB2ACD56C6005890E5 /* Debug */,
+				3A4974AC2ACD56C6005890E5 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
