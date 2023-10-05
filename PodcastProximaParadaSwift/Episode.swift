@@ -35,3 +35,30 @@ struct APIEpisodio: Codable {
     }
 }
 
+struct AudioEpisodio: Codable {
+    let contenido: String
+    var audioURL: URL? {
+        let patronInicial = "audio controls src=\""
+        let patronFinal = "\"></audio>"
+        let patron = "\(patronInicial)(.*?)\(patronFinal)"
+        
+        do {
+            let regex = try Regex(patron)
+            
+            if let firstMatch = try regex.firstMatch(in: contenido) {
+                let matchRange = firstMatch.range
+                
+                let urlString = String(contenido[matchRange])
+                    .replacingOccurrences(of: patronInicial, with: "")
+                    .replacingOccurrences(of: patronFinal, with: "")
+                
+                return URL(string: urlString)
+            }
+        } catch {
+            return nil
+        }
+        
+        return nil
+    }
+    
+}
