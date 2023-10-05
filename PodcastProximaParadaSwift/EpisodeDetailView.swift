@@ -7,9 +7,12 @@
 
 import SwiftData
 import SwiftUI
+import AVKit
 
 struct EpisodeDetailView: View {
     @Bindable var episode: Episodio
+    
+    @ObservedObject var vm = DetailEpisodeViewModel()
     
     var body: some View {
         ScrollView {
@@ -18,6 +21,13 @@ struct EpisodeDetailView: View {
         }
         .padding()
         List {
+            Button {
+                Task {
+                 try await vm.play(episode: episode)
+                }
+            } label: {
+                Image(systemName: "arrowtriangle.right.circle")
+            }
             Toggle("Escuchado", isOn: $episode.played)
             Toggle("Favorito", isOn: $episode.favorite)
                 .disabled(!episode.played)

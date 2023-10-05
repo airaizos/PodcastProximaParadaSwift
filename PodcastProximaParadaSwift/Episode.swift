@@ -30,13 +30,19 @@ struct APIEpisodio: Codable {
     let title: Rendered
     let content: Rendered
     
-    struct Rendered: Codable {
-        let rendered: String
-    }
+  
+}
+struct Rendered: Codable {
+    let rendered: String
 }
 
 struct AudioEpisodio: Codable {
-    let contenido: String
+    
+    let content: Rendered
+    var contenido: String {
+        content.rendered
+    }
+
     var audioURL: URL? {
         let patronInicial = "audio controls src=\""
         let patronFinal = "\"></audio>"

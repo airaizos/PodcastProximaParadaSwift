@@ -6,10 +6,15 @@
 //
 
 import Foundation
-
+import AVFoundation
 
 final class EpisodesListViewModel: ObservableObject {
-    let network = Network()
+    let network: Network
+   
+    init(network: Network = Network()) {
+        self.network = network
+
+    }
     
     func fetchEpisodes() async throws -> [Episodio] {
         var episodios: [Episodio] = []
@@ -18,7 +23,7 @@ final class EpisodesListViewModel: ObservableObject {
         
         for epi in apiEpisodios {
             
-            if let data = epi.content.rendered.data(using: .isoLatin1),
+            if let data = epi.content.rendered.data(using: .isoLatin1) ?? epi.content.rendered.data(using: .utf8),
                let attributedString = try? AttributedString.init(NSAttributedString(data:data, options: [.documentType: NSAttributedString.DocumentType.html], documentAttributes: nil)) {
                 let content = attributedString
                 
@@ -27,4 +32,6 @@ final class EpisodesListViewModel: ObservableObject {
         }
         return episodios
     }
+    
+ 
 }
