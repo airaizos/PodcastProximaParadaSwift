@@ -9,7 +9,7 @@ import SwiftUI
 
 struct ListView: View {
     @Environment(\.modelContext) var context
-    @Query(sort:\Episodio.id, order: .reverse) var episodes: [Episodio]
+    @Query(filter:#Predicate{ $0.categories.contains(3)}, sort:\Episodio.id ,order:.reverse ) var episodes: [Episodio]
     
     let filter = #Predicate { $0}
     var body: some View {

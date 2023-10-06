@@ -13,58 +13,30 @@ final class Episodio {
     let id: Int
     let title: String
     let content: String
+    let categories: [Int]
     var played: Bool = false
     var favorite: Bool = false
     var comments: String = ""
     
-    init(id: Int = 0, title: String = "", content: String = "") {
+    init(id: Int = 0, title: String = "", content: String = "", categories: [Int] = []) {
         self.id = id
         self.title = title
         self.content = content
+        self.categories = categories
     }
-    
 }
 
 struct APIEpisodio: Codable {
     let id: Int
     let title: Rendered
+    let categories: [Int]
     let content: Rendered
     
   
 }
+
 struct Rendered: Codable {
     let rendered: String
 }
 
-struct AudioEpisodio: Codable {
-    
-    let content: Rendered
-    var contenido: String {
-        content.rendered
-    }
 
-    var audioURL: URL? {
-        let patronInicial = "audio controls src=\""
-        let patronFinal = "\"></audio>"
-        let patron = "\(patronInicial)(.*?)\(patronFinal)"
-        
-        do {
-            let regex = try Regex(patron)
-            
-            if let firstMatch = try regex.firstMatch(in: contenido) {
-                let matchRange = firstMatch.range
-                
-                let urlString = String(contenido[matchRange])
-                    .replacingOccurrences(of: patronInicial, with: "")
-                    .replacingOccurrences(of: patronFinal, with: "")
-                
-                return URL(string: urlString)
-            }
-        } catch {
-            return nil
-        }
-        
-        return nil
-    }
-    
-}

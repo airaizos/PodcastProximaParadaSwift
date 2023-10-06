@@ -12,19 +12,21 @@ final class DetailEpisodeViewModel: ObservableObject {
     let network: Network
     
     let reproductor: ReproductorSonido
-
+    @Published var pitch:Float = 0.0 {
+        didSet {
+            reproductor.controlPitch(pitch)
+        }
+    }
+    @Published var speed:Float = 1 {
+        didSet {
+            reproductor.speedControl(speed)
+        }
+    }
     
-    init(network: Network = Network(),reproductor: ReproductorSonido = ReproductorSonido()) {
+    init(network: Network = Network(), reproductor: ReproductorSonido = ReproductorSonido()) {
         self.network = network
         self.reproductor = reproductor
     }
-
-//    private func getEpisodeAudio(_ episode: Episodio) -> URL? {
-//        let audio = AudioEpisodio(contenido: episode.content)
-//        
-//        return audio.audioURL
-//    }
-    //ir a buscar el postId y cogerlo de ahi
     
     func fetchURL(_ episode: Episodio) async throws -> URL? {
         let url = URL.episodeId(episode.id)
@@ -34,12 +36,12 @@ final class DetailEpisodeViewModel: ObservableObject {
         return audioEpisodio.audioURL
     }
     
-    
     func play(episode: Episodio) async throws {
         let url = try await fetchURL(episode)
         guard let url else { return }
 
-        try reproductor.playFrom(url)
+        try reproductor.playFromEngine(url)
         
     }
+    
 }

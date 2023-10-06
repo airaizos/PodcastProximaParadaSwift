@@ -13,4 +13,5 @@ extension URL {
     static func episodeId(_ id: Int) -> URL { URL(string:"https://proximaparadaswift.dev/wp-json/wp/v2/posts/\(id)")!
     }
 
+    static let categories = URL(string:"https://proximaparadaswift.dev/wp-json/wp/v2/categories")!
 }

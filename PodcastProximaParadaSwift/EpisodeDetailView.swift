@@ -14,6 +14,8 @@ struct EpisodeDetailView: View {
     
     @ObservedObject var vm = DetailEpisodeViewModel()
     
+  
+    
     var body: some View {
         ScrollView {
             Text(episode.content)
@@ -27,7 +29,31 @@ struct EpisodeDetailView: View {
                 }
             } label: {
                 Image(systemName: "arrowtriangle.right.circle")
+                    .font(.largeTitle)
             }
+         
+            //TODO: Ajustar bien la velocidad y el pitch
+                VStack{
+                    Stepper(value: $vm.speed, in: -0.5...1.5, step: 0.1) {
+                        HStack {
+                            Text("Speed")
+                            Spacer()
+                            Text(" \(vm.speed,format: .number.precision(.integerLength(0)))")
+                                .padding(.trailing,20)
+                                .foregroundStyle(vm.speed != 1 ? .red : .green)
+                        }
+                    }
+                    Stepper(value: $vm.pitch, in: -0.5...10, step: 0.5) {
+                        HStack {
+                            Text("Pitch")
+                            Spacer()
+                            Text(" \(vm.pitch,format: .number.precision(.integerLength(1)))")
+                                .padding(.trailing,20)
+                                .foregroundStyle(vm.pitch != 0 ? .red : .green)
+                        }
+                    }
+                }
+
             Toggle("Escuchado", isOn: $episode.played)
             Toggle("Favorito", isOn: $episode.favorite)
                 .disabled(!episode.played)
