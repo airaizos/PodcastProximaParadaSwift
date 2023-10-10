@@ -17,6 +17,7 @@ final class Episodio {
     var played: Bool = false
     var favorite: Bool = false
     var comments: String = ""
+    var audio: AudioFile = AudioFile(downloaded: false, pathAudio: "", timeInterval: 1445)
     
     init(id: Int = 0, title: String = "", content: String = "", categories: [Int] = []) {
         self.id = id
@@ -40,3 +41,14 @@ struct Rendered: Codable {
 }
 
 
+struct AudioFile: Codable {
+    let downloaded: Bool
+    let pathAudio: String
+    let timeInterval: TimeInterval
+    var duration: Duration  {
+        .seconds(timeInterval)
+    }
+    
+    
+    
+}

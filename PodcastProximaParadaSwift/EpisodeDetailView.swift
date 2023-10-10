@@ -10,26 +10,53 @@ import SwiftUI
 import AVKit
 
 struct EpisodeDetailView: View {
-    @Bindable var episode: Episodio
+    @ObservedObject var vm: DetailEpisodeViewModel
     
-    @ObservedObject var vm = DetailEpisodeViewModel()
-    
-  
+    @State var time = 0.0
     
     var body: some View {
         ScrollView {
-            Text(episode.content)
+            Text(vm.episode.content)
                 .font(.body)
         }
         .padding()
         List {
-            Button {
-                Task {
-                 try await vm.play(episode: episode)
+            HStack{
+                Group {
+                    if vm.isPlaying {
+                        Button {
+                            vm.pause(episode: vm.episode)
+                        } label: {
+                            Image(systemName: "pause.circle")
+                                .font(.largeTitle)
+                        }
+                    }else {
+                        Button {
+                            Task {
+                                try await vm.play(episode: vm.episode)
+                            }
+                        } label: {
+                            Image(systemName: "arrowtriangle.right.circle")
+                                .font(.largeTitle)
+                        }
+                    }
+                    
                 }
-            } label: {
-                Image(systemName: "arrowtriangle.right.circle")
-                    .font(.largeTitle)
+                Slider(value: $time) {
+                   Text("")
+                } minimumValueLabel: {
+                   Text("0")
+                } maximumValueLabel: {
+                    Text("50")
+                }
+                
+//                ProgressView(timerInterval: episode.audio.timeInterval, countsDown: true) {
+//                    Text("label")
+//                } currentValueLabel: {
+//                    Text("current")
+//                }
+
+              
             }
          
             //TODO: Ajustar bien la velocidad y el pitch
@@ -53,16 +80,15 @@ struct EpisodeDetailView: View {
                         }
                     }
                 }
-
-            Toggle("Escuchado", isOn: $episode.played)
-            Toggle("Favorito", isOn: $episode.favorite)
-                .disabled(!episode.played)
-            TextEditor(text: $episode.comments)
+            Toggle("Escuchado", isOn: $vm.episode.played)
+            Toggle("Favorito", isOn: $vm.episode.favorite)
+                .disabled(!vm.episode.played)
+            TextEditor(text: $vm.episode.comments)
                 .frame(height: 200)
                 .background(RoundedRectangle(cornerRadius: 10).stroke().foregroundStyle(Color.secondary).padding(-5))
         }
         .listStyle(.grouped)
-        .navigationTitle("\(episode.title)")
+        .navigationTitle("\(vm.episode.title)")
         .navigationBarTitleDisplayMode(.inline)
     }
         
@@ -72,12 +98,13 @@ struct EpisodeDetailView: View {
     do {
         let config = ModelConfiguration(isStoredInMemoryOnly: true)
         let container = try ModelContainer(for: Episodio.self, configurations: config)
-        let example = Episodio(id: 99, title: "Episodio Z Zarandeando SwiftData", content: "Proyecto de prueba con SwiftData")
+        let example = Episodio(id: 99, title: "Episodio Z Zarandeando SwiftData", content: "Proyecto de prueba con SwiftData \n Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam euismod justo in ligula lacinia, in elementum libero iaculis. Duis rhoncus, felis nec aliquam consectetur, felis elit tincidunt libero, sit amet hendrerit felis lectus eget libero. Nulla facilisi. Praesent aliquam, augue eget porttitor blandit, mauris nisi tincidunt erat, ac ultricies orci elit nec quam. Fusce in lacinia ante, et rhoncus dui. Curabitur eget risus dui. Nulla ut libero id libero euismod auctor vel eget libero. Nulla nec tortor quis arcu sodales bibendum ut ac urna. Etiam et arcu auctor, efficitur ex ut, varius turpis. Proin quis odio eu sapien efficitur tincidunt non non justo. Aenean id tellus vel odio pellentesque efficitur at nec purus. ")
         
         
-        return EpisodeDetailView(episode: example)
+        return EpisodeDetailView(vm: DetailEpisodeViewModel(episode: example))
             .modelContainer(container)
     } catch {
         fatalError("No se ha podido crear el modelo")
     }
 }
+

@@ -13,33 +13,56 @@ final class ReproductorSonido {
     private var pitch = 0.0
     private var rate = 1
     
+    let network: Network
+    let fileManager: FileManager
+   
+    init(network: Network = Network(), fileManager: FileManager = FileManager.default) {
+        self.network = network
+        self.fileManager = fileManager
+    }
+    
     let engine = AVAudioEngine()
     let speedControl = AVAudioUnitVarispeed()
     let pitchControl = AVAudioUnitTimePitch()
     
-    
-    func playFrom(_ url: URL) throws {
-        do {
-            let data = try Data(contentsOf: url)
-            
-            player = try AVAudioPlayer(data: data)
-        
-            player?.prepareToPlay()
-            player?.play()
-        } catch  {
-            throw NSError(domain: " playFrom(_ url: URL)", code: 1)
+    func fetchAudio(from episode: Episodio) async throws -> Data {
+        if let audioURL = try await network.fetchURL(episode) {
+            do {
+               return  try Data(contentsOf: audioURL)
+            } catch {
+                throw NSError(domain: "<< DATA: fetchAudio(from episode: Episodio) ", code: 0)
+            }
         }
+        throw NSError(domain: "<< URL: fetchAudio(from episode: Episodio) ", code: 1)
     }
     
-    func playFromEngine(_ url: URL) throws {
+    @discardableResult
+    func saveAudioData(from episode: Episodio) async throws -> Bool {
+        let audioFile = "\(episode.id).mp3"
+        
+        let data = try await fetchAudio(from: episode)
+        if !fileManager.fileExists(atPath: "\(episode.id).mp3") {
+            do {
+                try data.write(to: .documentsDirectory.appendingPathComponent(audioFile, conformingTo: .audio))
+                return true
+            } catch {
+                throw NSError(domain: "saveAudioData(from episode: Episodio)", code: 0)
+            }
+        } else { return false }
+    }
+    
+    func playFromEngine(_ episode: Episodio) async throws {
+        let audioFile = "\(episode.id).mp3"
         do {
+
+            let audioURL = URL.documentsDirectory.appendingPathComponent(audioFile, conformingTo: .mp3)
+            print("<<\(audioURL)")
+            if !fileManager.fileExists(atPath: audioFile) {
+                //descargar
+               try await saveAudioData(from: episode)
+            }
             
-            // TODO: - DESCARGAR EL AUDIO
-            let data = try Data(contentsOf: url)
-            let documentsURL = URL.documentsDirectory.appending(path: "audio")
-            try data.write(to: documentsURL)
-           
-            let file = try AVAudioFile(forReading: documentsURL)
+            let file = try AVAudioFile(forReading: audioURL)
             
             let audioPlayer = AVAudioPlayerNode()
             
@@ -51,10 +74,11 @@ final class ReproductorSonido {
             engine.connect(speedControl, to: pitchControl, format: nil)
             engine.connect(pitchControl, to: engine.mainMixerNode, format: nil)
             
-            audioPlayer.scheduleFile(file, at: nil)
+            await audioPlayer.scheduleFile(file, at: nil)
             
             try engine.start()
             audioPlayer.play()
+            //Thread 17: "player started when in a disconnected state"
         } catch  {
             throw NSError(domain: " playFrom(_ url: URL)", code: 1)
         }
@@ -68,5 +92,15 @@ final class ReproductorSonido {
    // The range of values is 0.25 to 4.0
     func speedControl(_ step: Float) {
         speedControl.rate = step
+    }
+    
+    
+    func isPlaying() -> Bool {
+        player?.isPlaying ?? false
+        
+    }
+    
+    func pause() {
+        player?.pause()
     }
 }

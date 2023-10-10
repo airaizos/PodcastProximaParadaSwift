@@ -10,10 +10,11 @@ import AVFoundation
 
 final class EpisodesListViewModel: ObservableObject {
     let network: Network
-   
-    init(network: Network = Network()) {
+    let reproductor: ReproductorSonido
+    
+    init(network: Network = Network(), reproductor: ReproductorSonido = ReproductorSonido()) {
         self.network = network
-
+        self.reproductor = reproductor
     }
     
     func fetchEpisodes() async throws -> [Episodio] {
@@ -33,5 +34,11 @@ final class EpisodesListViewModel: ObservableObject {
         return episodios
     }
     
- 
+    func play(episode: Episodio) async throws {
+        try await reproductor.playFromEngine(episode)
+    }
+    
+    
+   
+    
 }

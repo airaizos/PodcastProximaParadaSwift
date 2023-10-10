@@ -38,6 +38,14 @@ final class Network {
             
         }
     }
+    
+    func fetchURL(_ episode: Episodio) async throws -> URL? {
+        let url = URL.episodeId(episode.id)
+        
+       let audioEpisodio = try await fetchJson(url: url, type: AudioEpisodio.self)
+        
+        return audioEpisodio.audioURL
+    }
 }
 
 

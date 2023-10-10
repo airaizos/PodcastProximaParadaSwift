@@ -10,6 +10,7 @@ import Foundation
 
 final class DetailEpisodeViewModel: ObservableObject {
     let network: Network
+    var episode: Episodio
     
     let reproductor: ReproductorSonido
     @Published var pitch:Float = 0.0 {
@@ -23,25 +24,24 @@ final class DetailEpisodeViewModel: ObservableObject {
         }
     }
     
-    init(network: Network = Network(), reproductor: ReproductorSonido = ReproductorSonido()) {
+    @Published var isPlaying: Bool = false
+    
+    init(episode: Episodio, network: Network = Network(), reproductor: ReproductorSonido = ReproductorSonido()) {
+        self.episode = episode
         self.network = network
         self.reproductor = reproductor
     }
-    
-    func fetchURL(_ episode: Episodio) async throws -> URL? {
-        let url = URL.episodeId(episode.id)
-        
-       let audioEpisodio = try await network.fetchJson(url: url, type: AudioEpisodio.self)
-        
-        return audioEpisodio.audioURL
-    }
-    
-    func play(episode: Episodio) async throws {
-        let url = try await fetchURL(episode)
-        guard let url else { return }
 
-        try reproductor.playFromEngine(url)
-        
+    func play(episode: Episodio) async throws {
+        isPlaying.toggle()
+      try await reproductor.playFromEngine(episode)
     }
+    
+    func pause(episode:Episodio)  {
+        reproductor.pause()
+        isPlaying.toggle()
+    }
+    
+    
     
 }
