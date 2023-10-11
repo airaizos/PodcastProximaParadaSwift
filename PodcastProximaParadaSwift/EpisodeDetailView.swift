@@ -14,24 +14,28 @@ struct EpisodeDetailView: View {
     
     @State var time = 0.0
     
+    
     var body: some View {
         ScrollView {
             Text(vm.episode.content)
                 .font(.body)
         }
         .padding()
-        List {
+        
             HStack{
                 Group {
                     if vm.isPlaying {
+                       
                         Button {
+                            vm.isPlaying.toggle()
                             vm.pause(episode: vm.episode)
                         } label: {
                             Image(systemName: "pause.circle")
                                 .font(.largeTitle)
                         }
-                    }else {
+                    } else {
                         Button {
+                            vm.isPlaying.toggle()
                             Task {
                                 try await vm.play(episode: vm.episode)
                             }
@@ -42,23 +46,30 @@ struct EpisodeDetailView: View {
                     }
                     
                 }
-                Slider(value: $time) {
-                   Text("")
-                } minimumValueLabel: {
-                   Text("0")
-                } maximumValueLabel: {
-                    Text("50")
-                }
                 
-//                ProgressView(timerInterval: episode.audio.timeInterval, countsDown: true) {
-//                    Text("label")
-//                } currentValueLabel: {
-//                    Text("current")
-//                }
+                Button{
+                    vm.goSeconds(-15)
+                } label: {
+                    Image(systemName: "gobackward.15")
+                }
+                .disabled(!vm.isPlaying)
+                .frame(width: 44)
+                ProgressView(timerInterval: vm.duration, countsDown: true) {
+                    Text("label")
+                } currentValueLabel: {
+                    Text("current")
+                }
+                Button{
+                    vm.goSeconds(15)
+                } label: {
+                    Image(systemName: "goforward.15")
+                }
+                .disabled(!vm.isPlaying)
+                .frame(width: 44)
+                
 
-              
             }
-         
+        List {
             //TODO: Ajustar bien la velocidad y el pitch
                 VStack{
                     Stepper(value: $vm.speed, in: -0.5...1.5, step: 0.1) {
@@ -90,8 +101,13 @@ struct EpisodeDetailView: View {
         .listStyle(.grouped)
         .navigationTitle("\(vm.episode.title)")
         .navigationBarTitleDisplayMode(.inline)
+        .onAppear {
+            Task {
+                vm.duration = await vm.getEpisodeTimeInterval()
+            }
+        }
     }
-        
+    
 }
 
 #Preview {

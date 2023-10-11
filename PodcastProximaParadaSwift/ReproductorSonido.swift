@@ -51,7 +51,7 @@ final class ReproductorSonido {
         } else { return false }
     }
     
-    func playFromEngine(_ episode: Episodio) async throws {
+    func playFromEngineNOFUNCIONA(_ episode: Episodio) async throws {
         let audioFile = "\(episode.id).mp3"
         do {
 
@@ -79,6 +79,8 @@ final class ReproductorSonido {
             try engine.start()
             audioPlayer.play()
             //Thread 17: "player started when in a disconnected state"
+            
+          
         } catch  {
             throw NSError(domain: " playFrom(_ url: URL)", code: 1)
         }
@@ -102,5 +104,21 @@ final class ReproductorSonido {
     
     func pause() {
         player?.pause()
+    }
+    
+    func playFromEngine(_ episode: Episodio) throws {
+        let audioFile = "\(episode.id).mp3"
+       
+     let audioURL = URL.documentsDirectory.appendingPathComponent(audioFile, conformingTo: .mp3)
+        do {
+            let data = try Data(contentsOf: audioURL)
+            
+            player = try AVAudioPlayer(data: data)
+        
+            player?.prepareToPlay()
+            player?.play()
+        } catch  {
+            throw NSError(domain: " playFrom(_ url: URL)", code: 1)
+        }
     }
 }
