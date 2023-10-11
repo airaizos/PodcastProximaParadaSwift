@@ -11,7 +11,7 @@ import SwiftUI
 struct EpisodesListView: View {
     @Environment(\.modelContext) var context
     @Query(sort:\Episodio.id, order: .reverse) var episodes: [Episodio]
-    @ObservedObject var vm = EpisodesListViewModel()
+    @StateObject var vm = EpisodesListViewModel()
     @State private var sortOrder = SortDescriptor(\Episodio.title)
 
     @State private var searchText = ""
