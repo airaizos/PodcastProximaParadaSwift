@@ -51,4 +51,11 @@ final class PodcastProximaParadaSwiftTests: XCTestCase {
         }
     }
 
+    func test_CategoriesURL_shouldBeGraterThan0() async throws {
+        let categories = try await network.fetchJson(url: URL.categoriesURL, type: [Categories].self)
+        
+        XCTAssertGreaterThan(categories.count, 0)
+        
+    }
+    
 }
