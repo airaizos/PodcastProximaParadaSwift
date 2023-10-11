@@ -27,28 +27,13 @@ final class Episodio {
     }
 }
 
-struct APIEpisodio: Codable {
-    let id: Int
-    let title: Rendered
-    let categories: [Int]
-    let content: Rendered
+extension Episodio {
     
-  
-}
-
-struct Rendered: Codable {
-    let rendered: String
-}
-
-
-struct AudioFile: Codable {
-    let downloaded: Bool
-    let pathAudio: String
-    let timeInterval: TimeInterval
-    var duration: Duration  {
-        .seconds(timeInterval)
+    var categoriesView: String {
+        ListFormatter.localizedString(byJoining: categories.map { "\($0)" } )
     }
-    
-    
-    
+}
+
+extension Episodio {
+    static var preview =  Episodio(id: 99, title: "Episodio No: \(99)", content: "Contenido del episodio \(99) \n Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam euismod justo in ligula lacinia, in elementum libero iaculis. Duis rhoncus, felis nec aliquam consectetur, felis elit tincidunt libero, sit amet hendrerit felis lectus eget libero. Nulla facilisi. Praesent aliquam, augue eget porttitor blandit, mauris nisi tincidunt erat, ac ultricies orci elit nec quam. Fusce in lacinia ante, et rhoncus dui. Curabitur eget risus dui. Nulla ut libero id libero euismod auctor vel eget libero. Nulla nec tortor quis arcu sodales bibendum ut ac urna. Etiam et arcu auctor, efficitur ex ut, varius turpis. Proin quis odio eu sapien efficitur tincidunt non non justo. Aenean id tellus vel odio pellentesque efficitur at nec purus. ", categories: [3,4,99])
 }

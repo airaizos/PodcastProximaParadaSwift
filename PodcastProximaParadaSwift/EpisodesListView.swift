@@ -13,7 +13,7 @@ struct EpisodesListView: View {
     @Query(sort:\Episodio.id, order: .reverse) var episodes: [Episodio]
     @ObservedObject var vm = EpisodesListViewModel()
     @State private var sortOrder = SortDescriptor(\Episodio.title)
-   // @State private var filter = #Predicate { $0 }
+
     @State private var searchText = ""
     
     var body: some View {

@@ -28,14 +28,14 @@ final class EpisodesListViewModel: ObservableObject {
                let attributedString = try? AttributedString.init(NSAttributedString(data:data, options: [.documentType: NSAttributedString.DocumentType.html], documentAttributes: nil)) {
                 let content = attributedString
                 
-                episodios.append(Episodio(id: epi.id, title: epi.title.rendered, content: String(content.characters)))
+                episodios.append(Episodio(id: epi.id, title: epi.title.rendered, content: String(content.characters),categories: epi.categories))
             }
         }
         return episodios
     }
     
-    func play(episode: Episodio) async throws {
-        try await reproductor.playFromEngine(episode)
+    func play(episode: Episodio) throws {
+        try  reproductor.playFromEngine(episode)
     }
     
     
