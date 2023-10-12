@@ -11,7 +11,11 @@ import SwiftUI
 struct CategoriesView: View {
     @Environment(\.modelContext) var context
     @Query(filter: #Predicate { $0.id != 41 },sort: \PostCategory.name) var categories: [PostCategory]
-    @Query(filter: #Predicate<Episodio> { $0.title.contains("Episodio") },sort:\Episodio.id, order:.reverse) var episodios: [Episodio]
+    @Query(filter: #Predicate<Episodio> {
+        //filtrar los episodios
+        $0.title.contains("Episodio")
+
+    },sort:\Episodio.id, order:.reverse) var episodios: [Episodio]
     
     @StateObject var vm = CategoriesViewModel()
     var columns:[GridItem] = [GridItem(.fixed(50))]
@@ -67,8 +71,8 @@ struct CategoriesView: View {
                         
                         
                     }
-                   
-                    
+            
+
                 }
 
             }
@@ -88,14 +92,10 @@ struct CategoriesView: View {
         PostCategory.self
     ])
     let container = try! ModelContainer(for: schema, configurations: config)
-    for i in 1..<10 {
-        let episode = Episodio(id: i, title: "Episodio No: \(i)", content: "Contenido del episodio \(i) \n Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam euismod justo in ligula lacinia, in elementum libero iaculis. Duis rhoncus, felis nec aliquam consectetur, felis elit tincidunt libero, sit amet hendrerit felis lectus eget libero. Nulla facilisi. Praesent aliquam, augue eget porttitor blandit, mauris nisi tincidunt erat, ac ultricies orci elit nec quam. Fusce in lacinia ante, et rhoncus dui. Curabitur eget risus dui. Nulla ut libero id libero euismod auctor vel eget libero. Nulla nec tortor quis arcu sodales bibendum ut ac urna. Etiam et arcu auctor, efficitur ex ut, varius turpis. Proin quis odio eu sapien efficitur tincidunt non non justo. Aenean id tellus vel odio pellentesque efficitur at nec purus. ", categories: Array(1..<i))
-        episode.played = i % 3 == 0
-        episode.favorite = i % 2 == 0
-        
+    let episodies = Episodio.previewTenEpisodes
+    for episode in episodies {
         container.mainContext.insert(episode)
     }
-
     return CategoriesView(vm:CategoriesViewModelMock())
         .modelContainer(container)
 }
