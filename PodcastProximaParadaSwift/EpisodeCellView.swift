@@ -30,6 +30,7 @@ struct EpisodeCellView: View {
                 .font(.caption2)
             Text("\(episode.audio.duration.formatted(.time(pattern: .minuteSecond)))")
         }
+      
     }
 }
 

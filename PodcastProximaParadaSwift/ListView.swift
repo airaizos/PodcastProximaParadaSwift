@@ -19,8 +19,12 @@ struct ListView: View {
                     EpisodeCellView(episode: episode)
                     }
             }
+        
             .onDelete(perform: deleteItems)
         }
+        .listStyle(.inset)
+        .background(Color.clear1)
+        .scrollContentBackground(.hidden)
     }
     
     func deleteItems(_ indexSet: IndexSet) {

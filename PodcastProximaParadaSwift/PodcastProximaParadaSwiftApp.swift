@@ -36,7 +36,14 @@ struct PodcastProximaParadaSwiftApp: App {
                     .tabItem {
                         Image(systemName: "checklist.unchecked")
                     }
-                    
+                EnlacesView()
+                    .tabItem {
+                        Image(systemName: "link")
+                    }
+                AboutView()
+                    .tabItem {
+                        Image(systemName: "info")
+                    }
             }
             .modelContainer(sharedModelContainer)
         

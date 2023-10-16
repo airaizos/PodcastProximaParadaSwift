@@ -18,11 +18,14 @@ struct EpisodesListView: View {
     
     var body: some View {
         NavigationStack {
-            ListView(sort: sortOrder,searchString: searchText)
-                .searchable(text: $searchText)
-            .navigationDestination(for: Episodio.self) { value in
-                EpisodeDetailView(vm: DetailEpisodeViewModel(episode: value))
-                  
+            ZStack{
+                ListView(sort: sortOrder,searchString: searchText)
+                    .searchable(text: $searchText)
+                    .navigationDestination(for: Episodio.self) { value in
+                        EpisodeDetailView(vm: DetailEpisodeViewModel(episode: value))
+                        
+                    }
+               
             }
             .navigationTitle("Episodes")
             .toolbar {

@@ -26,63 +26,69 @@ struct CategoriesView: View {
     @State var showEpisodes = false
     
     var body: some View {
-        VStack{
-            Button{
-                Task {
-                    let categories = try await vm.fetchCategories()
-                    for category in categories {
-                        context.insert(category)
+        ZStack{
+            VStack{
+                Button{
+                    Task {
+                        let categories = try await vm.fetchCategories()
+                        for category in categories {
+                            context.insert(category)
+                        }
+                    }
+                } label: {
+                    ZStack{
+                        Image("episodes")
+                            .resizable()
+                            .scaledToFit()
+                            .clipShape(Circle())
+                            .zIndex(1)
+                        Circle().stroke(lineWidth: 2).blur(radius: 7)
+                            .zIndex(0)
                     }
                 }
-            } label: {
-                ZStack{
-                    Image("episodes")
-                        .resizable()
-                        .scaledToFit()
-                        .clipShape(Circle())
-                        .zIndex(1)
-                    Circle().stroke(lineWidth: 2).blur(radius: 7)
-                        .zIndex(0)
-                }
-            }
-            .disabled(!categories.isEmpty)
-            .frame(width: 150)
-            Text("Categorías Episodios")
-                .font(.largeTitle)
-                .bold()
-            ScrollView(.horizontal) {
-                LazyHGrid(rows: columns,alignment: .center, spacing: 20) {
-                    ForEach(categories) { category in
-                        Button {
-                            showEpisodes.toggle()
-                        } label: {
-                            ZStack{
-                                VStack {
-                                    Text(category.name == "episodios" ? "Todos" : category.name)
-                                        .font(.subheadline.bold())
-                                    Text("\(category.count)")
-                                        .font(.callout)
-                                        .foregroundStyle(.secondary)
+                .disabled(!categories.isEmpty)
+                .frame(width: 150)
+                Text("Categorías Episodios")
+                    .font(.largeTitle)
+                    .bold()
+                ScrollView(.horizontal) {
+                    LazyHGrid(rows: columns,alignment: .center, spacing: 20) {
+                        ForEach(categories) { category in
+                            Button {
+                                showEpisodes.toggle()
+                            } label: {
+                                ZStack{
+                                    VStack {
+                                        Text(category.name == "episodios" ? "Todos" : category.name)
+                                            .font(.subheadline.bold())
+                                        Text("\(category.count)")
+                                            .font(.callout)
+                                            .foregroundStyle(.secondary)
+                                    }
                                 }
                             }
+                            .buttonStyle(.borderedProminent)
+                            .tint(Color.gray)
+                            
+                            
+                            
                         }
-                        .buttonStyle(.borderedProminent)
-                        .tint(Color.black)
                         
                         
                     }
-            
-
+                    
                 }
-
+                .frame(height: 60)
+                List(episodios) { episodio in
+                    EpisodeCellView(episode: episodio)
+                }
+                .listStyle(.inset)
             }
-            .frame(height: 60)
-            List(episodios) { episodio in
-               EpisodeCellView(episode: episodio)
-            }
-            .listStyle(.inset)
+            Color.clearest
+                .ignoresSafeArea()
+                .zIndex(-1)
         }
-    }
+        }
 }
 
 #Preview {

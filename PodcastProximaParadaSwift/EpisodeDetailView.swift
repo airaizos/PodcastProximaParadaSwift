@@ -16,12 +16,23 @@ struct EpisodeDetailView: View {
     
     
     var body: some View {
-        ScrollView {
-            Text(vm.episode.content)
-                .font(.body)
-        }
-        .padding()
+        ZStack{
+            
+            ScrollView {
+                Text(vm.episode.title)
+                    .font(.largeTitle)
+                    .foregroundStyle(Color.pinkest)
+                Text(vm.episode.content)
+                    .font(.body)
+                    .foregroundStyle(Color.clear1)
+                
+            }
+            .padding()
         
+        Color.darkest
+            .ignoresSafeArea()
+            .zIndex(-1)
+        }
             HStack{
                 Group {
                     if vm.isPlaying {
@@ -37,7 +48,7 @@ struct EpisodeDetailView: View {
                         Button {
                             vm.isPlaying.toggle()
                             Task {
-                                try await vm.play(episode: vm.episode)
+                                try vm.play(episode: vm.episode)
                             }
                         } label: {
                             Image(systemName: "arrowtriangle.right.circle")
@@ -68,7 +79,8 @@ struct EpisodeDetailView: View {
                 .frame(width: 44)
                 
 
-            }
+       
+        }
         List {
             //TODO: Ajustar bien la velocidad y el pitch
                 VStack{
@@ -98,6 +110,8 @@ struct EpisodeDetailView: View {
                 .frame(height: 200)
                 .background(RoundedRectangle(cornerRadius: 10).stroke().foregroundStyle(Color.secondary).padding(-5))
         }
+        .scrollContentBackground(.hidden)
+        .background(Color.darkest)
         .listStyle(.grouped)
         .navigationTitle("\(vm.episode.title)")
         .navigationBarTitleDisplayMode(.inline)
