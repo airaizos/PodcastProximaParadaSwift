@@ -7,17 +7,19 @@
 
 import SwiftData
 import SwiftUI
-import AVKit
+import AVFoundation
 
 struct EpisodeDetailView: View {
     @ObservedObject var vm: DetailEpisodeViewModel
     
     @State var time = 0.0
     
+    @State var audioFileState = AudioFileState.none
+    
+    let player = AVPlayer()
     
     var body: some View {
         ZStack{
-            
             ScrollView {
                 Text(vm.episode.title)
                     .font(.largeTitle)
@@ -33,7 +35,40 @@ struct EpisodeDetailView: View {
             .ignoresSafeArea()
             .zIndex(-1)
         }
-            HStack{
+        HStack{
+            
+            ButtonPlayerView(state: $audioFileState) {
+                switch audioFileState {
+                case .none: 
+                    Task {
+                     try await vm.saveAudioData()
+                        audioFileState = .downloaded
+                    }
+                case .downloaded: 
+                    let playerItem = AVPlayerItem(url: vm.audioURL)
+                    self.player.replaceCurrentItem(with: playerItem)
+                    self.player.play()
+                    
+                    audioFileState = vm.isAudioEpisodeDownloaded() ? .playing : .downloaded
+                    
+                case .playing: 
+                    self.player.pause()
+                    
+                    audioFileState = .pause
+                case .pause: 
+                    
+                    self.player.play()
+                    audioFileState = .playing
+                }
+            }
+            
+            ReproductorControlsView(player: player,
+                                    timeObserver: PlayerTimeObserver(player: player),
+                                    durationObserver: PlayerDurationObserver(player: player),
+                                    itemObserver: PlayerItemObserver(player: player))
+        }
+        
+            HStack {
                 Group {
                     if vm.isPlaying {
                        
@@ -116,9 +151,11 @@ struct EpisodeDetailView: View {
         .navigationTitle("\(vm.episode.title)")
         .navigationBarTitleDisplayMode(.inline)
         .onAppear {
-            Task {
-                vm.duration = await vm.getEpisodeTimeInterval()
-            }
+            
+            audioFileState = vm.isAudioEpisodeDownloaded() ? .downloaded : .none
+        }
+        .onDisappear {
+            self.player.replaceCurrentItem(with: nil)
         }
     }
     
@@ -138,3 +175,43 @@ struct EpisodeDetailView: View {
     }
 }
 
+enum AudioFileState {
+    case none, downloaded, playing, pause
+    
+}
+
+struct ButtonPlayerView: View {
+    @Binding var state: AudioFileState
+    var action: () -> Void
+    
+    var body: some View {
+        Group {
+            switch state {
+            case .none: Button {
+                action()
+            } label: {
+                Image(systemName: "arrow.down.circle")
+                    .font(.largeTitle)
+            }
+            case .downloaded: Button {
+                action()
+            } label: {
+                Image(systemName: "play.circle")
+                    .font(.largeTitle)
+            }
+            case .playing: Button {
+                action()
+            } label: {
+                Image(systemName: "pause.circle")
+                    .font(.largeTitle)
+            }
+            case .pause: Button {
+                action()
+            } label: {
+                Image(systemName: "play.circle")
+                    .font(.largeTitle)
+            }
+            }
+        }
+    }
+}

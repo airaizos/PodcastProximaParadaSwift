@@ -10,7 +10,8 @@ import Foundation
 
 extension URL {
     static func audioURL(episode: Episodio) -> URL {
-        URL.documentsDirectory.appendingPathExtension("\(episode.id).mp3")
+      //  URL.documentsDirectory.appendingPathExtension("\(episode.id).mp3")
+        URL.documentsDirectory.appendingPathComponent("\(episode.id).mp3", conformingTo: .mp3)
     }
     
     static func postsByCategory(_ category:Int) -> URL {
