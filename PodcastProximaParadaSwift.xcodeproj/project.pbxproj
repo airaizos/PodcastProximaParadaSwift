@@ -46,6 +46,7 @@
 		3A87AEAB2ADEA740003B8109 /* PlayerDurationObserver.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A87AEAA2ADEA740003B8109 /* PlayerDurationObserver.swift */; };
 		3A87AEAD2ADEA838003B8109 /* ReproductorControlsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A87AEAC2ADEA838003B8109 /* ReproductorControlsView.swift */; };
 		3A87AEAF2ADEA863003B8109 /* PlaybackState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A87AEAE2ADEA863003B8109 /* PlaybackState.swift */; };
+		3A87AEB22ADEF8E9003B8109 /* TogglePPSStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A87AEB12ADEF8E9003B8109 /* TogglePPSStyle.swift */; };
 		3ACA32232AD33BDC00CC28B7 /* ReadMe.md in Resources */ = {isa = PBXBuildFile; fileRef = 3ACA32222AD33BDC00CC28B7 /* ReadMe.md */; };
 		3ACA32262AD3438300CC28B7 /* ButtonStatusHStackView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3ACA32252AD3438300CC28B7 /* ButtonStatusHStackView.swift */; };
 /* End PBXBuildFile section */
@@ -102,6 +103,7 @@
 		3A87AEAA2ADEA740003B8109 /* PlayerDurationObserver.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayerDurationObserver.swift; sourceTree = "<group>"; };
 		3A87AEAC2ADEA838003B8109 /* ReproductorControlsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReproductorControlsView.swift; sourceTree = "<group>"; };
 		3A87AEAE2ADEA863003B8109 /* PlaybackState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaybackState.swift; sourceTree = "<group>"; };
+		3A87AEB12ADEF8E9003B8109 /* TogglePPSStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TogglePPSStyle.swift; sourceTree = "<group>"; };
 		3ACA32222AD33BDC00CC28B7 /* ReadMe.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = ReadMe.md; sourceTree = "<group>"; };
 		3ACA32252AD3438300CC28B7 /* ButtonStatusHStackView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ButtonStatusHStackView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -162,6 +164,7 @@
 		3A18D6EC2ADD4AFA00F09C16 /* Detail */ = {
 			isa = PBXGroup;
 			children = (
+				3A87AEB02ADEF8D8003B8109 /* Styles */,
 				3A7E8BB32ACF057400CE1459 /* ReproductorSonido.swift */,
 				3A18D6EF2ADD4B3E00F09C16 /* View */,
 				3A18D6EE2ADD4B2100F09C16 /* Model */,
@@ -404,6 +407,14 @@
 			name = Reproductor;
 			sourceTree = "<group>";
 		};
+		3A87AEB02ADEF8D8003B8109 /* Styles */ = {
+			isa = PBXGroup;
+			children = (
+				3A87AEB12ADEF8E9003B8109 /* TogglePPSStyle.swift */,
+			);
+			name = Styles;
+			sourceTree = "<group>";
+		};
 		3ACA32242AD3436800CC28B7 /* Subviews */ = {
 			isa = PBXGroup;
 			children = (
@@ -537,6 +548,7 @@
 				3A292E3B2AD6BE3600908794 /* Rendered.swift in Sources */,
 				3A87AEA92ADEA623003B8109 /* PlayerItemObserver.swift in Sources */,
 				3A87AEAF2ADEA863003B8109 /* PlaybackState.swift in Sources */,
+				3A87AEB22ADEF8E9003B8109 /* TogglePPSStyle.swift in Sources */,
 				3A49749D2ACD5422005890E5 /* Network.swift in Sources */,
 				3A4974962ACD5348005890E5 /* Episode.swift in Sources */,
 				3A18D6FB2ADD558F00F09C16 /* APIPage.swift in Sources */,

@@ -20,105 +20,60 @@ struct EpisodeDetailView: View {
     
     var body: some View {
         ZStack{
-            ScrollView {
+            Color.darkest
+                .ignoresSafeArea()
+                .zIndex(-1)
+            VStack {
                 Text(vm.episode.title)
                     .font(.largeTitle)
                     .foregroundStyle(Color.pinkest)
-                Text(vm.episode.content)
-                    .font(.body)
-                    .foregroundStyle(Color.clear1)
-                
-            }
-            .padding()
-        
-        Color.darkest
-            .ignoresSafeArea()
-            .zIndex(-1)
-        }
-        HStack{
-            
-            ButtonPlayerView(state: $audioFileState) {
-                switch audioFileState {
-                case .none: 
-                    Task {
-                     try await vm.saveAudioData()
-                        audioFileState = .downloaded
-                    }
-                case .downloaded: 
-                    let playerItem = AVPlayerItem(url: vm.audioURL)
-                    self.player.replaceCurrentItem(with: playerItem)
-                    self.player.play()
+                ScrollView {
+                    Text(vm.episode.content)
+                        .lineLimit(20)
+                        .font(.body)
+                        .foregroundStyle(Color.clear1)
                     
-                    audioFileState = vm.isAudioEpisodeDownloaded() ? .playing : .downloaded
-                    
-                case .playing: 
-                    self.player.pause()
-                    
-                    audioFileState = .pause
-                case .pause: 
-                    
-                    self.player.play()
-                    audioFileState = .playing
                 }
-            }
-            
-            ReproductorControlsView(player: player,
-                                    timeObserver: PlayerTimeObserver(player: player),
-                                    durationObserver: PlayerDurationObserver(player: player),
-                                    itemObserver: PlayerItemObserver(player: player))
-        }
-        
-            HStack {
-                Group {
-                    if vm.isPlaying {
-                       
-                        Button {
-                            vm.isPlaying.toggle()
-                            vm.pause(episode: vm.episode)
-                        } label: {
-                            Image(systemName: "pause.circle")
-                                .font(.largeTitle)
-                        }
-                    } else {
-                        Button {
-                            vm.isPlaying.toggle()
+             
+                
+                .padding()
+                
+                
+                //TODO: Ajustar bien la velocidad y el pitch
+                HStack {
+                    ButtonPlayerView(state: $audioFileState) {
+                        switch audioFileState {
+                        case .none:
                             Task {
-                                try vm.play(episode: vm.episode)
+                                try await vm.saveAudioData()
+                                audioFileState = .downloaded
                             }
-                        } label: {
-                            Image(systemName: "arrowtriangle.right.circle")
-                                .font(.largeTitle)
+                        case .downloaded:
+                            let playerItem = AVPlayerItem(url: vm.audioURL)
+                            self.player.replaceCurrentItem(with: playerItem)
+                            self.player.play()
+                            
+                            audioFileState = vm.isAudioEpisodeDownloaded() ? .playing : .downloaded
+                            
+                        case .playing:
+                            self.player.pause()
+                            
+                            audioFileState = .pause
+                        case .pause:
+                            
+                            self.player.play()
+                            audioFileState = .playing
                         }
                     }
-                    
+                    ReproductorControlsView(player: player,
+                                            timeObserver: PlayerTimeObserver(player: player),
+                                            durationObserver: PlayerDurationObserver(player: player),
+                                            itemObserver: PlayerItemObserver(player: player))
                 }
+                .padding(.horizontal)
+                .background(Color.darkest)
                 
-                Button{
-                    vm.goSeconds(-15)
-                } label: {
-                    Image(systemName: "gobackward.15")
-                }
-                .disabled(!vm.isPlaying)
-                .frame(width: 44)
-                ProgressView(timerInterval: vm.duration, countsDown: true) {
-                    Text("label")
-                } currentValueLabel: {
-                    Text("current")
-                }
-                Button{
-                    vm.goSeconds(15)
-                } label: {
-                    Image(systemName: "goforward.15")
-                }
-                .disabled(!vm.isPlaying)
-                .frame(width: 44)
-                
-
-       
-        }
-        List {
-            //TODO: Ajustar bien la velocidad y el pitch
-                VStack{
+                VStack {
                     Stepper(value: $vm.speed, in: -0.5...1.5, step: 0.1) {
                         HStack {
                             Text("Speed")
@@ -137,26 +92,39 @@ struct EpisodeDetailView: View {
                                 .foregroundStyle(vm.pitch != 0 ? .red : .green)
                         }
                     }
+                    
+                    Toggle("Escuchado", isOn: $vm.episode.played)
+                    Toggle("Favorito", isOn: $vm.episode.favorite)
+                        .disabled(!vm.episode.played)
+                    
                 }
-            Toggle("Escuchado", isOn: $vm.episode.played)
-            Toggle("Favorito", isOn: $vm.episode.favorite)
-                .disabled(!vm.episode.played)
-            TextEditor(text: $vm.episode.comments)
-                .frame(height: 200)
-                .background(RoundedRectangle(cornerRadius: 10).stroke().foregroundStyle(Color.secondary).padding(-5))
-        }
-        .scrollContentBackground(.hidden)
-        .background(Color.darkest)
-        .listStyle(.grouped)
-        .navigationTitle("\(vm.episode.title)")
-        .navigationBarTitleDisplayMode(.inline)
-        .onAppear {
-            
-            audioFileState = vm.isAudioEpisodeDownloaded() ? .downloaded : .none
-        }
-        .onDisappear {
-            self.player.replaceCurrentItem(with: nil)
-        }
+                .padding(.horizontal)
+                .background(Color.darkest)
+                .foregroundStyle(Color.clear1)
+                
+                TextEditor(text: $vm.episode.comments)
+                    .frame(height: 200)
+                    .background(RoundedRectangle(cornerRadius: 10).stroke().foregroundStyle(Color.darkest).padding(-5))
+                
+                    .foregroundStyle(Color.darker)
+                
+                
+                    .padding(.horizontal)
+            }
+    }
+        //        .scrollContentBackground(.hidden)
+        //        .background(Color.darkest)
+        //        .listStyle(.grouped)
+            .navigationTitle("\(vm.episode.title)")
+            .navigationBarTitleDisplayMode(.inline)
+            .onAppear {
+                
+                audioFileState = vm.isAudioEpisodeDownloaded() ? .downloaded : .none
+            }
+            .onDisappear {
+                self.player.replaceCurrentItem(with: nil)
+            }
+        
     }
     
 }
@@ -191,25 +159,41 @@ struct ButtonPlayerView: View {
                 action()
             } label: {
                 Image(systemName: "arrow.down.circle")
-                    .font(.largeTitle)
+                    .font(.title)
+                    .symbolRenderingMode(.palette)
+                    .foregroundStyle(Color.clearest,Color.pinkest)
             }
+            .frame(width: 44)
+          
+          
             case .downloaded: Button {
                 action()
             } label: {
                 Image(systemName: "play.circle")
-                    .font(.largeTitle)
+                    .font(.title)
+                    .symbolRenderingMode(.palette)
+                    .foregroundStyle(Color.clearest,Color.pinkest)
+                    .frame(width: 44)
             }
+        
             case .playing: Button {
                 action()
             } label: {
                 Image(systemName: "pause.circle")
-                    .font(.largeTitle)
+                    .font(.title)
+                    .symbolRenderingMode(.palette)
+                    .foregroundStyle(Color.clearest,Color.pinkest)
+                    .frame(width: 44)
             }
+         
             case .pause: Button {
                 action()
             } label: {
                 Image(systemName: "play.circle")
-                    .font(.largeTitle)
+                    .font(.title)
+                    .symbolRenderingMode(.palette)
+                    .foregroundStyle(Color.clearest,Color.pinkest)
+                    .frame(width: 44)
             }
             }
         }

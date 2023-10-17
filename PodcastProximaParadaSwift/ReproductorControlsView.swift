@@ -20,15 +20,38 @@ struct ReproductorControlsView: View {
     @State private var state = PlaybackState.waitingForSelection
     
     var body: some View {
-        
-        
-        
-        Slider(value: $currentTime, in: 0...currentDuration, onEditingChanged: sliderEditingChanged, minimumValueLabel: Text("\(formatSecondsToHMS(currentTime))"), maximumValueLabel: Text("\(formatSecondsToHMS(currentDuration))")) {
-            Text("")
+        HStack{
+            Button {
+                goSeconds()
+            } label: {
+                Image(systemName: "goforward.90")
+                    .font(.title)
+                    .symbolRenderingMode(.palette)
+                    .foregroundStyle(Color.clearest,Color.pinkest)
+                    
+            }
+            .frame(width: 44)
+           
+            Slider(value: $currentTime, in: 0...currentDuration, onEditingChanged: sliderEditingChanged, minimumValueLabel: Text("\(formatSecondsToHMS(currentTime))").font(.caption2).fontWeight(.light).foregroundStyle(Color.clear1), maximumValueLabel: Text("\(formatSecondsToHMS(currentDuration))").font(.caption2).fontWeight(.light).foregroundStyle(Color.clear1)) {
+                Text("")
+            }
+            .disabled(state != .playing)
+            
+            
+         
+            
+            Button {
+                goSeconds(.init(seconds: -30, preferredTimescale: 600))
+            } label: {
+                Image(systemName: "gobackward.30")
+                    .font(.title)
+                    .symbolRenderingMode(.palette)
+                    .foregroundStyle(Color.clearest,Color.pinkest)
+            }
+            .frame(width: 44)
         }
-        .disabled(state != .playing)
-        
-        .padding()
+        .tint(Color.clearest)
+        .background(Color.darkest)
         .onReceive(timeObserver.publisher) { time in
             self.currentTime = time
             if time > 0 {
