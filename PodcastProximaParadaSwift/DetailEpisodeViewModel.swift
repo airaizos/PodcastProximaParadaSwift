@@ -20,20 +20,6 @@ final class DetailEpisodeViewModel: ObservableObject {
     
     var audioURL: URL { URL.audioURL(episode: episode) }
     
-    let reproductor: ReproductorSonido
-    @Published var pitch:Float = 0.0 {
-        didSet {
-            reproductor.controlPitch(pitch)
-        }
-    }
-    @Published var speed:Float = 1 {
-        didSet {
-            reproductor.speedControl(speed)
-        }
-    }
-    
-  //  private let rates:[(String,Float)] = [("0.9x",0.9),("1x",1),("1.1x",1.1),("1.25x",1.25),("1.5x",1.5),("1.75x",1.75),("2x",2)]
-    
     private let rates: [Float] = [1,1.1,1.2,1.3,1.5,1.75,2]
     
     @Published var stepRate = 0
@@ -41,10 +27,9 @@ final class DetailEpisodeViewModel: ObservableObject {
     @Published var isPlaying: Bool = false
     @Published var duration: ClosedRange<Date> = Date()...Date().addingTimeInterval(0)
     
-    init(episode: Episodio, network: Network = Network(), reproductor: ReproductorSonido = ReproductorSonido(), fileManager: FileManager = FileManager.default) {
+    init(episode: Episodio, network: Network = Network(), fileManager: FileManager = FileManager.default) {
         self.episode = episode
         self.network = network
-        self.reproductor = reproductor
         self.fileManager = fileManager
     }
     
@@ -58,29 +43,13 @@ final class DetailEpisodeViewModel: ObservableObject {
             rate = rates[stepRate]
         }
     }
-
-    func play(episode: Episodio) throws {
-       
-      try reproductor.playFromEngine(episode)
-    }
-    
-    func pause(episode:Episodio)  {
-        reproductor.pause()
-     
-    }
-    
-    func goSeconds(_ sec: Double) {
-        // Avanza 15 sec o retrocede segundos
-        
-    }
     
     func isAudioEpisodeDownloaded() -> Bool {
         fileManager.fileExists(atPath: audioURL.path()) ? true : false
     }
     
-    
     /// Descarga de la red el data del audio del episodio
-    func fetchAudio(from episode: Episodio) async throws -> Data {
+    private func fetchAudio(from episode: Episodio) async throws -> Data {
         if let audioURL = try await network.fetchURL(episode) {
             do {
                return try Data(contentsOf: audioURL)
@@ -106,38 +75,6 @@ final class DetailEpisodeViewModel: ObservableObject {
             }
         } else { return false }
     }
-    
-    
-    func duracionAudioSeconds() async throws -> TimeInterval {
-        let asset = AVAsset(url: audioURL)
-        do {
-            let durationSec = try await CMTimeGetSeconds(asset.load(.duration))
-            
-            if !durationSec.isNaN {
-                return durationSec
-            } else {
-                return 0
-            }
-        } catch {
-            throw NSError(domain: "duracionAudio", code: 1)
-        }
-    }
-    
-    func duracionAudioClosedRange(seconds : TimeInterval) -> ClosedRange<Date> {
-        let inicio = Date()
-        let fin = inicio.addingTimeInterval(seconds)
-        return inicio...fin
-    }
-    
-    func getEpisodeTimeInterval() async -> ClosedRange<Date> {
-        do {
-            let seconds = try await duracionAudioSeconds()
-            return duracionAudioClosedRange(seconds: seconds)
-        } catch {
-            return Date()...Date().addingTimeInterval(0)
-        }
-    }
-    
 }
 
 enum AudioRate:String,CaseIterable {

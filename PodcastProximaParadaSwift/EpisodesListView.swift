@@ -12,7 +12,7 @@ struct EpisodesListView: View {
     @Environment(\.modelContext) var context
     @Query(sort:\Episodio.id, order: .reverse) var episodes: [Episodio]
     @StateObject var vm = EpisodesListViewModel()
-    @State private var sortOrder = SortDescriptor(\Episodio.title)
+    @State private var sortOrder = SortDescriptor(\Episodio.id)
 
     @State private var searchText = ""
     
@@ -32,37 +32,29 @@ struct EpisodesListView: View {
            
                     Button {
                         Task {
-                            let episodes = try await vm.fetchEpisodes()
-                            for episode in episodes {
-                                context.insert(episode)
+                            let epDescargados = try await vm.fetchEpisodes()
+                            print("ANTES",episodes.count)
+                            for episode in epDescargados {
+                                if !episodes.contains(where: { $0.id == episode.id }) {
+                                    context.insert(episode)
+                                }
                             }
+                            print("DESPUÉS",episodes.count)
                         }
                     } label: {
                         Image(systemName: "arrow.clockwise")
                     }
                     
-                    .disabled(!episodes.isEmpty)
+                    //.disabled(!episodes.isEmpty)
                     
-                    Menu("Ordenar", systemImage: "arrow.up.arrow.down") {
-                        Picker("Sort", selection: $sortOrder) {
-                            Text("Núm")
-                                .tag(SortDescriptor(\Episodio.id))
-                            Text("Título")
-                                .tag(SortDescriptor(\Episodio.title))
-                            Text("Notas")
-                                .tag(SortDescriptor(\Episodio.content))
-                                
-                            
-                        }
+                Menu("Ordenar", systemImage: "arrow.up.arrow.down") {
+                    Picker("Sort", selection: $sortOrder) {
+                        Text("Id")
+                            .tag(SortDescriptor(\Episodio.id))
+                        Text("Título")
+                            .tag(SortDescriptor(\Episodio.title))
                     }
-//                    Menu("Filtrar", systemImage: "cone") {
-//                        Picker("Sort", selection: $filter) {
-//                            Text("Favoritos")
-//                                .tag(#Predicate{ $0.favorite })
-//                            Text("Escuchados")
-//                                .tag(#Predicate { $0.played })
-//                        }
-//                    }
+                }
                     Button {
                         deleteAllItems()
                     } label: {
@@ -78,17 +70,29 @@ struct EpisodesListView: View {
             context.delete(episode)
         }
     }
-   
 }
 
 #Preview {
-    let config = ModelConfiguration(isStoredInMemoryOnly: true)
-    let container = try! ModelContainer(for: Episodio.self, configurations: config)
-    for i in 1..<10 {
-        let episode = Episodio(id: i, title: "Episodio No: \(i)", content: "Contenido del episodio \(i) \n Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam euismod justo in ligula lacinia, in elementum libero iaculis. Duis rhoncus, felis nec aliquam consectetur, felis elit tincidunt libero, sit amet hendrerit felis lectus eget libero. Nulla facilisi. Praesent aliquam, augue eget porttitor blandit, mauris nisi tincidunt erat, ac ultricies orci elit nec quam. Fusce in lacinia ante, et rhoncus dui. Curabitur eget risus dui. Nulla ut libero id libero euismod auctor vel eget libero. Nulla nec tortor quis arcu sodales bibendum ut ac urna. Etiam et arcu auctor, efficitur ex ut, varius turpis. Proin quis odio eu sapien efficitur tincidunt non non justo. Aenean id tellus vel odio pellentesque efficitur at nec purus. ", categories: [2,3,4])
-        container.mainContext.insert(episode)
+    let container = ModelContainer.previewContainer
+    for e in Episodio.previewTenEpisodes {
+        container.mainContext.insert(e)
     }
-
    return EpisodesListView()
         .modelContainer(container)
+}
+
+
+enum SortEpisodes:Int {
+    case idR = 1, idF = 2, titleR = 3, titleF = 4
+    
+    var order: SortDescriptor<Episodio> {
+        switch self {
+            
+        case .idR: SortDescriptor(\Episodio.id)
+        case .idF: SortDescriptor(\Episodio.id)
+        case .titleR: SortDescriptor(\Episodio.title)
+        case .titleF: SortDescriptor(\Episodio.title)
+        }
+    }
+    
 }

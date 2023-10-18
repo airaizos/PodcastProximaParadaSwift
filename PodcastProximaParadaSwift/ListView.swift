@@ -10,7 +10,7 @@ import SwiftUI
 struct ListView: View {
     @Environment(\.modelContext) var context
   //  @Query(filter:#Predicate{ $0.categories.contains(3)}, sort:\Episodio.id ,order:.reverse ) var episodes: [Episodio]
-    @Query(filter:#Predicate<Episodio> { $0.id == 1 } ) var episodes: [Episodio]
+    @Query(sort:\Episodio.id ,order:.reverse) var episodes: [Episodio]
   
     var body: some View {
         List {
@@ -33,27 +33,28 @@ struct ListView: View {
             context.delete(item)
         }
     }
-    //¿Como añado un array de predicates?
+    
+   
     init(sort: SortDescriptor<Episodio>, searchString: String) {
      
-        _episodes = Query(filter: #Predicate { episode in
-           
-           // episode.categories.contains(3) No funciona
-            episode.title.contains("Episodio")
-           
-        },sort:[sort])
+//        _episodes = Query(filter: #Predicate { episode in
+//           
+//           // episode.categories.contains(3) No funciona
+//         //   episode.title.contains("Episodio")
+//           
+//        },sort:[sort])
+        
+        _episodes = Query(sort:[sort])
     }
 }
 
 #Preview {
-    let config = ModelConfiguration(isStoredInMemoryOnly: true)
-    let container = try! ModelContainer(for: Episodio.self, configurations: config)
-    let episodies = Episodio.previewTenEpisodes
-    for episode in episodies {
-        container.mainContext.insert(episode)
+    let container = ModelContainer.previewContainer
+    for e in Episodio.previewTenEpisodes {
+        container.mainContext.insert(e)
     }
-
-    return NavigationStack {   ListView(sort: SortDescriptor(\Episodio.title), searchString: "")
+    
+    return NavigationStack {   ListView(sort: SortDescriptor(\Episodio.id), searchString: "")
             .modelContainer(container)
     }
 }

@@ -92,15 +92,9 @@ struct CategoriesView: View {
 }
 
 #Preview {
-    let config = ModelConfiguration(isStoredInMemoryOnly: true)
-    let schema = Schema([
-        Episodio.self,
-        PostCategory.self
-    ])
-    let container = try! ModelContainer(for: schema, configurations: config)
-    let episodies = Episodio.previewTenEpisodes
-    for episode in episodies {
-        container.mainContext.insert(episode)
+    let container = ModelContainer.previewContainer
+    for e in Episodio.previewTenEpisodes {
+        container.mainContext.insert(e)
     }
     return CategoriesView(vm:CategoriesViewModelMock())
         .modelContainer(container)

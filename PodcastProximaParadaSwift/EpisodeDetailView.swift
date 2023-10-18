@@ -16,7 +16,6 @@ struct EpisodeDetailView: View {
     
     @State var audioFileState = AudioFileState.none
     
-   // let player = AVPlayer()
     let player = AVPlayer()
     var body: some View {
         ZStack{
@@ -34,12 +33,8 @@ struct EpisodeDetailView: View {
                         .foregroundStyle(Color.clear1)
                     
                 }
-                
-                
                 .padding()
-                
-                
-                //TODO: Ajustar bien la velocidad y el pitch
+
                 HStack {
                     ButtonPlayerView(state: $audioFileState) {
                         switch audioFileState {
