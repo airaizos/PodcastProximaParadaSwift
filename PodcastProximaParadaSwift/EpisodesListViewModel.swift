@@ -35,7 +35,7 @@ final class EpisodesListViewModel: ObservableObject {
         
         for epi in apiEpisodios {
             
-            if let data = epi.content.rendered.data(using: .isoLatin1) ?? epi.content.rendered.data(using: .utf8),
+            if let data = epi.content.rendered.data(using: .isoLatin2) ?? epi.content.rendered.data(using: .utf8),
                let attributedString = try? AttributedString.init(NSAttributedString(data:data, options: [.documentType: NSAttributedString.DocumentType.html], documentAttributes: nil)) {
                 let content = attributedString
                 

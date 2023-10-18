@@ -16,8 +16,8 @@ struct EpisodeDetailView: View {
     
     @State var audioFileState = AudioFileState.none
     
+   // let player = AVPlayer()
     let player = AVPlayer()
-    
     var body: some View {
         ZStack{
             Color.darkest
@@ -29,7 +29,7 @@ struct EpisodeDetailView: View {
                     .foregroundStyle(Color.pinkest)
                 ScrollView {
                     Text(vm.episode.content)
-                        .lineLimit(20)
+                      
                         .font(.body)
                         .foregroundStyle(Color.clear1)
                     
@@ -72,28 +72,36 @@ struct EpisodeDetailView: View {
                 }
                 .padding(.horizontal)
                 .background(Color.darkest)
-                
                 VStack {
-                    
-                        
                         HStack {
                             Text("Speed")
                             Spacer()
-                            Text(" \(vm.speed,format: .number.precision(.integerLength(0)))")
+                            Text(" \(vm.rate,format: .number.precision(.integerLength(1)))x")
                                 .padding(.trailing,20)
-                                .foregroundStyle(vm.speed != 1 ? Color.pinkest : Color.clear1)
+                                .foregroundStyle(vm.rate != 1 ? Color.pinkest : Color.clear1)
                             HStack(spacing: -13) {
-                                
+    
                                 Button {
+                                  
+                                
                                     //-
+                                    vm.changeRate(up: false)
+                                    player.rate = vm.rate
+                              
                                 } label: {
                                     Image(systemName: "minus")
                                     
                                 }
+                                .disabled(vm.rate == 1)
                                 .buttonStyle(StepperPPSStyle())
                                 Button("+") {
+                                   
                                     //+
+                                    vm.changeRate(up: true)
+                                    player.rate = vm.rate
+                                
                                 }
+                                .disabled(vm.stepRate == 6)
                             }
                             .buttonStyle(StepperPPSStyle())
                         }
