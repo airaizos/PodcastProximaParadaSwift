@@ -37,6 +37,8 @@ struct AboutView: View {
                 }
                 
                 .padding()
+                Divider()
+                    .background(Color.pinkest)
             }
             Color.pinkest
                 .ignoresSafeArea()

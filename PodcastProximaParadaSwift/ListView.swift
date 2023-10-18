@@ -13,18 +13,22 @@ struct ListView: View {
     @Query(sort:\Episodio.id ,order:.reverse) var episodes: [Episodio]
   
     var body: some View {
-        List {
-            ForEach(episodes) { episode in
-                NavigationLink(value: episode) {
-                    EpisodeCellView(episode: episode)
+        ZStack{
+            List {
+                ForEach(episodes) { episode in
+                    NavigationLink(value: episode) {
+                        EpisodeCellView(episode: episode, color: Color.clear1)
                     }
+                }
+                .onDelete(perform: deleteItems)
             }
-        
-            .onDelete(perform: deleteItems)
+            .listStyle(.inset)
+            .background(Color.clear1)
+            .scrollContentBackground(.hidden)
+            Color.clear1
+                .ignoresSafeArea()
+                .zIndex(-1)
         }
-        .listStyle(.inset)
-        .background(Color.clear1)
-        .scrollContentBackground(.hidden)
     }
     
     func deleteItems(_ indexSet: IndexSet) {

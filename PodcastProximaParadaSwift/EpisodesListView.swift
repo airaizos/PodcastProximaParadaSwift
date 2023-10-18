@@ -23,13 +23,10 @@ struct EpisodesListView: View {
                     .searchable(text: $searchText)
                     .navigationDestination(for: Episodio.self) { value in
                         EpisodeDetailView(vm: DetailEpisodeViewModel(episode: value))
-                        
                     }
-               
             }
             .navigationTitle("Episodes")
             .toolbar {
-           
                     Button {
                         Task {
                             let epDescargados = try await vm.fetchEpisodes()
@@ -61,9 +58,13 @@ struct EpisodesListView: View {
                         Image(systemName: "trash")
                             .foregroundStyle(.red)
                     }
-                
+                Divider()
+                    .background(Color.clear1)
             }
+            
+          
         }
+       
     }
     func deleteAllItems() {
         for episode in episodes {
@@ -79,20 +80,4 @@ struct EpisodesListView: View {
     }
    return EpisodesListView()
         .modelContainer(container)
-}
-
-
-enum SortEpisodes:Int {
-    case idR = 1, idF = 2, titleR = 3, titleF = 4
-    
-    var order: SortDescriptor<Episodio> {
-        switch self {
-            
-        case .idR: SortDescriptor(\Episodio.id)
-        case .idF: SortDescriptor(\Episodio.id)
-        case .titleR: SortDescriptor(\Episodio.title)
-        case .titleF: SortDescriptor(\Episodio.title)
-        }
-    }
-    
 }

@@ -10,7 +10,7 @@
  
  */
 
-import Foundation
+import SwiftUI
 import SwiftData
 
 @Model
@@ -38,6 +38,17 @@ extension Episodio {
     var categoriesView: String {
         ListFormatter.localizedString(byJoining: categories.map { "\($0)" } )
     }
+    
+    func attributedContent(dark: Bool) -> AttributedString {
+        if let att = attributedTextFromHTML(content) {
+            var result = att
+            result.foregroundColor = dark ? Color.darkest : Color.clear1
+            result.font = .body
+            return result
+        }
+       return ""
+    }
+    
 }
 
 extension Episodio {

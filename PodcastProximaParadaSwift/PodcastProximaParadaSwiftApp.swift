@@ -31,11 +31,12 @@ struct PodcastProximaParadaSwiftApp: App {
                     .tabItem {
                         Image(systemName: "music.note.list")
                     }
-                  
+              
                 CategoriesView()
                     .tabItem {
                         Image(systemName: "checklist.unchecked")
                     }
+                 
                 EnlacesView()
                     .tabItem {
                         Image(systemName: "link")
@@ -46,9 +47,8 @@ struct PodcastProximaParadaSwiftApp: App {
                     }
             }
             .modelContainer(sharedModelContainer)
-        
-        
+            .tint(Color.darkest)
+            
         }
-        
     }
 }

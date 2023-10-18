@@ -10,8 +10,10 @@ import SwiftData
 
 struct EpisodeCellView: View {
     var episode: Episodio
+    var color: Color
     var body: some View {
-        VStack(alignment: .leading) {
+        ZStack{
+            VStack(alignment: .leading) {
             HStack{
                 Text("\(episode.id)")
                     .font(.subheadline)
@@ -22,25 +24,27 @@ struct EpisodeCellView: View {
             Text(episode.categoriesView)
                 .font(.caption2)
                 .foregroundStyle(.secondary)
-            ButtonsStatusHStackView(played: episode.played, favorite: episode.favorite, downloaded: episode.audio.downloaded)
-            
-            
-            Text(episode.content)
+            ButtonsStatusHStackView(played: episode.played, favorite: episode.favorite, downloaded: episode.audio.downloaded) {
+                
+            }
+            Text(episode.attributedContent(dark: true))
                 .lineLimit(2)
                 .font(.caption2)
             Text("\(episode.audio.duration.formatted(.time(pattern: .minuteSecond)))")
         }
-      
+            .background(color.padding(.horizontal,-40).padding(.vertical,-10))
+            
+    }
+       
     }
 }
 
 #Preview {
-    let config = ModelConfiguration(isStoredInMemoryOnly: true)
-    let container = try! ModelContainer(for: Episodio.self, configurations: config)
-        let episode = Episodio(id: 99, title: "Episodio No: \(99)", content: "Contenido del episodio \(99) \n Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam euismod justo in ligula lacinia, in elementum libero iaculis. Duis rhoncus, felis nec aliquam consectetur, felis elit tincidunt libero, sit amet hendrerit felis lectus eget libero. Nulla facilisi. Praesent aliquam, augue eget porttitor blandit, mauris nisi tincidunt erat, ac ultricies orci elit nec quam. Fusce in lacinia ante, et rhoncus dui. Curabitur eget risus dui. Nulla ut libero id libero euismod auctor vel eget libero. Nulla nec tortor quis arcu sodales bibendum ut ac urna. Etiam et arcu auctor, efficitur ex ut, varius turpis. Proin quis odio eu sapien efficitur tincidunt non non justo. Aenean id tellus vel odio pellentesque efficitur at nec purus. ", categories: [2,3,4])
+    let container = ModelContainer.previewContainer
+    let episode = Episodio.preview
         container.mainContext.insert(episode)
     
 
-   return EpisodeCellView(episode: episode)
+    return EpisodeCellView(episode: episode,color: Color.clear1)
         .modelContainer(container)
 }

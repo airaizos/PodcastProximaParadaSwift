@@ -10,6 +10,7 @@ import SwiftUI
 import AVFoundation
 
 struct EpisodeDetailView: View {
+    @Environment(\.dismiss) var dismiss
     @ObservedObject var vm: DetailEpisodeViewModel
     
     @State var time = 0.0
@@ -18,24 +19,34 @@ struct EpisodeDetailView: View {
     
     let player = AVPlayer()
     var body: some View {
-        ZStack{
+        ZStack(alignment:.leading) {
+           
             Color.darkest
                 .ignoresSafeArea()
                 .zIndex(-1)
             VStack {
+                HStack {
+                    Button{
+                        dismiss()
+                    } label: {
+                        Image(systemName: "chevron.left")
+                            .font(.title)
+                        
+                    }
+                    .frame(height: 44)
+                    .padding(.horizontal)
+                    Spacer()
+                }
                 Text(vm.episode.title)
                     .font(.largeTitle)
                     .foregroundStyle(Color.pinkest)
-                    .padding(.horizontal)
+                    .padding(.horizontal,10)
+                   
                 ScrollView {
-                    Text(vm.episode.content)
-                      
-                        .font(.body)
-                        .foregroundStyle(Color.clear1)
-                    
+                    Text(vm.episode.attributedContent(dark: false))
                 }
                 .padding()
-
+                
                 HStack {
                     ButtonPlayerView(state: $audioFileState) {
                         switch audioFileState {
@@ -69,67 +80,50 @@ struct EpisodeDetailView: View {
                 .padding(.horizontal)
                 .background(Color.darkest)
                 VStack {
-                        HStack {
-                            Text("Speed")
-                            Spacer()
-                            Text(" \(vm.rate,format: .number.precision(.integerLength(1)))x")
-                                .padding(.trailing,20)
-                                .foregroundStyle(vm.rate != 1 ? Color.pinkest : Color.clear1)
-                            HStack(spacing: -13) {
-    
-                                Button {
-                                  
+                    HStack {
+                        Text("Speed")
+                        Spacer()
+                        Text(" \(vm.rate,format: .number.precision(.integerLength(1)))x")
+                            .padding(.trailing,20)
+                            .foregroundStyle(vm.rate != 1 ? Color.pinkest : Color.clear1)
+                        HStack(spacing: -13) {
+                            
+                            Button {
+                                vm.changeRate(up: false)
+                                player.rate = vm.rate
                                 
-                                    //-
-                                    vm.changeRate(up: false)
-                                    player.rate = vm.rate
-                              
-                                } label: {
-                                    Image(systemName: "minus")
-                                    
-                                }
-                                .disabled(vm.rate == 1)
-                                .buttonStyle(StepperPPSStyle())
-                                Button("+") {
-                                   
-                                    //+
-                                    vm.changeRate(up: true)
-                                    player.rate = vm.rate
-                                
-                                }
-                                .disabled(vm.stepRate == 6)
+                            } label: {
+                                Image(systemName: "minus")
                             }
+                            .disabled(vm.rate == 1)
                             .buttonStyle(StepperPPSStyle())
+                            Button("+") {
+                                vm.changeRate(up: true)
+                                player.rate = vm.rate
+                                
+                            }
+                            .disabled(vm.stepRate == 6)
                         }
+                        .buttonStyle(StepperPPSStyle())
+                    }
                     
                     
                     HStack {
                         Toggle("Escuchado", isOn: $vm.episode.played)
-                            .toggleStyle(TogglePPSStyle())
                         Toggle("Favorito", isOn: $vm.episode.favorite)
                             .disabled(!vm.episode.played)
-                            .toggleStyle(TogglePPSStyle())
+                         
                     }
-                    
+                    .tint(Color.pink1)
                     .padding(.vertical, 10)
                 }
                 .padding(.horizontal)
                 .background(Color.darkest)
                 .foregroundStyle(Color.clear1)
-                
-                TextEditor(text: $vm.episode.comments)
-                    .frame(height: 100)
-                    .background(RoundedRectangle(cornerRadius: 10).stroke().foregroundStyle(Color.darkest).padding(-5))
-                
-                    .foregroundStyle(Color.darker)
-                
-                
-                    .padding(.horizontal)
             }
         }
-
-        .navigationTitle("\(vm.episode.title)")
-        .navigationBarTitleDisplayMode(.inline)
+        .toolbar(.hidden, for: .navigationBar)
+        .tint(Color.white)
         .onAppear {
             
             audioFileState = vm.isAudioEpisodeDownloaded() ? .downloaded : .none
@@ -137,23 +131,16 @@ struct EpisodeDetailView: View {
         .onDisappear {
             self.player.replaceCurrentItem(with: nil)
         }
-        
     }
-    
 }
 
 #Preview {
-    do {
-        let config = ModelConfiguration(isStoredInMemoryOnly: true)
-        let container = try ModelContainer(for: Episodio.self, configurations: config)
-        let example = Episodio(id: 99, title: "Episodio Z Zarandeando SwiftData", content: "Proyecto de prueba con SwiftData \n Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam euismod justo in ligula lacinia, in elementum libero iaculis. Duis rhoncus, felis nec aliquam consectetur, felis elit tincidunt libero, sit amet hendrerit felis lectus eget libero. Nulla facilisi. Praesent aliquam, augue eget porttitor blandit, mauris nisi tincidunt erat, ac ultricies orci elit nec quam. Fusce in lacinia ante, et rhoncus dui. Curabitur eget risus dui. Nulla ut libero id libero euismod auctor vel eget libero. Nulla nec tortor quis arcu sodales bibendum ut ac urna. Etiam et arcu auctor, efficitur ex ut, varius turpis. Proin quis odio eu sapien efficitur tincidunt non non justo. Aenean id tellus vel odio pellentesque efficitur at nec purus. ")
-        
-        
-        return EpisodeDetailView(vm: DetailEpisodeViewModel(episode: example))
-            .modelContainer(container)
-    } catch {
-        fatalError("No se ha podido crear el modelo")
-    }
+    let container = ModelContainer.previewContainer
+    let example = Episodio.preview
+    
+    return EpisodeDetailView(vm: DetailEpisodeViewModel(episode: example))
+        .modelContainer(container)
+    
 }
 
 enum AudioFileState {

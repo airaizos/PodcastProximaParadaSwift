@@ -76,7 +76,3 @@ final class DetailEpisodeViewModel: ObservableObject {
         } else { return false }
     }
 }
-
-
-
-

@@ -30,6 +30,8 @@ struct EnlacesView: View {
                         text = await vm.fetchEnlaces()
                     }
                 }
+                Divider()
+                    .background(Color.pink1)
             }
             Color.pink1
                 .ignoresSafeArea()

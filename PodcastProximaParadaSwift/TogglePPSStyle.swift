@@ -7,6 +7,7 @@
 
 import SwiftUI
 
+// Se comporta raro
 struct TogglePPSStyle: ToggleStyle {
     var onColor = Color.clear1
     var offColor = Color.pink1
@@ -15,6 +16,7 @@ struct TogglePPSStyle: ToggleStyle {
     func makeBody(configuration: Configuration) -> some View {
         HStack {
             configuration.label
+                .font(.callout)
                 .foregroundStyle(onColor)
             Spacer()
             Button(action: { configuration.isOn.toggle() }) {
@@ -34,4 +36,3 @@ struct TogglePPSStyle: ToggleStyle {
         .padding(.horizontal)
     }
 }
-

@@ -33,9 +33,7 @@ final class EpisodesListViewModel: ObservableObject {
         
         for epi in apiEpisodios {
      
-            let content = attributedTextFromHTML(epi.content.rendered) ?? "**No Content**"
-                
-            episodios.append(Episodio(id: epi.id, title: epi.title.rendered, content: String(content.characters),categories: epi.categories))
+            episodios.append(Episodio(id: epi.id, title: epi.title.rendered, content: epi.content.rendered,categories: epi.categories))
             }
         
         return episodios

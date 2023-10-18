@@ -69,20 +69,16 @@ struct CategoriesView: View {
                             }
                             .buttonStyle(.borderedProminent)
                             .tint(Color.gray)
-                            
-                            
-                            
                         }
-                        
-                        
                     }
-                    
                 }
                 .frame(height: 60)
                 List(episodios) { episodio in
-                    EpisodeCellView(episode: episodio)
+                    EpisodeCellView(episode: episodio, color: Color.clearest)
                 }
                 .listStyle(.inset)
+                Divider()
+                    .background(Color.clearest)
             }
             Color.clearest
                 .ignoresSafeArea()
