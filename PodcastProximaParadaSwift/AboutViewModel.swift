@@ -5,7 +5,7 @@
 //  Created by Adrian Iraizos Mendoza on 16/10/23.
 //
 
-import Foundation
+import SwiftUI
 
 
 final class AboutViewModel:ObservableObject {
@@ -21,7 +21,10 @@ final class AboutViewModel:ObservableObject {
             
             
             if let content = attributedTextFromHTML(page.content.rendered) {
-                return content
+                var result = content
+                result.font = .body
+                result.foregroundColor = Color.darkest
+                return result
             } else {
                 return "**No Content**"
             }

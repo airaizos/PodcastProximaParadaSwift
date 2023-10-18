@@ -5,7 +5,7 @@
 //  Created by Adrian Iraizos Mendoza on 16/10/23.
 //
 
-import Foundation
+import SwiftUI
 
 
 final class EnlacesViewModel: ObservableObject {
@@ -20,7 +20,10 @@ final class EnlacesViewModel: ObservableObject {
             let page = try await network.fetchJson(url: .enlaces, type: APIPage.self)
             
             if let content = attributedTextFromHTML(page.content.rendered) {
-                return content
+                var result = content
+                result.font = .body
+                result.foregroundColor = Color.darkest
+                return result
             } else {
                 return "**No Content**"
             }
