@@ -14,23 +14,30 @@ struct AboutView: View {
     
     var body: some View {
         ZStack{
-            ScrollView {
-                AsyncImage(url: .perfilPhoto) { image in
-                    image
-                        .resizable()
-                        .scaledToFit()
-                        .frame(width: 200)
-                        .clipShape(RoundedRectangle(cornerRadius: 10))
-                } placeholder: {
+            VStack {
+                Text("Sobre mí")
+                    .font(.largeTitle)
+                    .bold()
+                    .foregroundStyle(Color.darkest)
+                ScrollView {
+                    AsyncImage(url: .perfilPhoto) { image in
+                        image
+                            .resizable()
+                            .scaledToFit()
+                            .frame(width: 200)
+                            .clipShape(RoundedRectangle(cornerRadius: 10))
+                    } placeholder: {
+                        
+                    }
+                    
+                    Text(text)
+                        .fontDesign(.rounded)
+                    
                     
                 }
                 
-                Text(text)
-                    .fontDesign(.rounded)
-                  
-                
+                .padding()
             }
-            .padding()
             Color.pinkest
                 .ignoresSafeArea()
                 .zIndex(-1)

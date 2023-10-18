@@ -14,14 +14,21 @@ struct EnlacesView: View {
     
     var body: some View {
         ZStack {
-            ScrollView {
-                Text(text)
-                    .fontDesign(.rounded)
-            }
-            .padding()
-            .onAppear {
-                Task {
-                    text = await vm.fetchEnlaces()
+            VStack(spacing: 5) {
+                Text("Enlaces")
+                    .font(.largeTitle)
+                    .bold()
+                    .foregroundStyle(Color.darkest)
+                AsyncImage(url: .logoSwift, scale: 3)
+                ScrollView {
+                    Text(text)
+                        .fontDesign(.rounded)
+                }
+                .padding(.horizontal)
+                .onAppear {
+                    Task {
+                        text = await vm.fetchEnlaces()
+                    }
                 }
             }
             Color.pink1

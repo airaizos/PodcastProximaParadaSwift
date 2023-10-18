@@ -22,4 +22,6 @@ extension URL {
     static let aboutMe = URL(string: "https://www.proximaparadaswift.dev/wp-json/wp/v2/pages/556")!
     
     static let enlaces = URL(string: "https://www.proximaparadaswift.dev/wp-json/wp/v2/pages/229")!
+    
+    static let logoSwift = URL(string: "https://www.proximaparadaswift.dev/wp-content/uploads/2023/09/swiftLogo.png")!
 }

@@ -34,7 +34,7 @@ struct EpisodeDetailView: View {
                         .foregroundStyle(Color.clear1)
                     
                 }
-             
+                
                 
                 .padding()
                 
@@ -74,29 +74,40 @@ struct EpisodeDetailView: View {
                 .background(Color.darkest)
                 
                 VStack {
-                    Stepper(value: $vm.speed, in: -0.5...1.5, step: 0.1) {
+                    
+                        
                         HStack {
                             Text("Speed")
                             Spacer()
                             Text(" \(vm.speed,format: .number.precision(.integerLength(0)))")
                                 .padding(.trailing,20)
-                                .foregroundStyle(vm.speed != 1 ? .red : .green)
+                                .foregroundStyle(vm.speed != 1 ? Color.pinkest : Color.clear1)
+                            HStack(spacing: -13) {
+                                
+                                Button {
+                                    //-
+                                } label: {
+                                    Image(systemName: "minus")
+                                    
+                                }
+                                .buttonStyle(StepperPPSStyle())
+                                Button("+") {
+                                    //+
+                                }
+                            }
+                            .buttonStyle(StepperPPSStyle())
                         }
-                    }
-                    Stepper(value: $vm.pitch, in: -0.5...10, step: 0.5) {
-                        HStack {
-                            Text("Pitch")
-                            Spacer()
-                            Text(" \(vm.pitch,format: .number.precision(.integerLength(1)))")
-                                .padding(.trailing,20)
-                                .foregroundStyle(vm.pitch != 0 ? .red : .green)
-                        }
+                    
+                    
+                    HStack {
+                        Toggle("Escuchado", isOn: $vm.episode.played)
+                            .toggleStyle(TogglePPSStyle())
+                        Toggle("Favorito", isOn: $vm.episode.favorite)
+                            .disabled(!vm.episode.played)
+                            .toggleStyle(TogglePPSStyle())
                     }
                     
-                    Toggle("Escuchado", isOn: $vm.episode.played)
-                    Toggle("Favorito", isOn: $vm.episode.favorite)
-                        .disabled(!vm.episode.played)
-                    
+                    .padding(.vertical, 10)
                 }
                 .padding(.horizontal)
                 .background(Color.darkest)
@@ -111,19 +122,17 @@ struct EpisodeDetailView: View {
                 
                     .padding(.horizontal)
             }
-    }
-        //        .scrollContentBackground(.hidden)
-        //        .background(Color.darkest)
-        //        .listStyle(.grouped)
-            .navigationTitle("\(vm.episode.title)")
-            .navigationBarTitleDisplayMode(.inline)
-            .onAppear {
-                
-                audioFileState = vm.isAudioEpisodeDownloaded() ? .downloaded : .none
-            }
-            .onDisappear {
-                self.player.replaceCurrentItem(with: nil)
-            }
+        }
+
+        .navigationTitle("\(vm.episode.title)")
+        .navigationBarTitleDisplayMode(.inline)
+        .onAppear {
+            
+            audioFileState = vm.isAudioEpisodeDownloaded() ? .downloaded : .none
+        }
+        .onDisappear {
+            self.player.replaceCurrentItem(with: nil)
+        }
         
     }
     
@@ -164,8 +173,8 @@ struct ButtonPlayerView: View {
                     .foregroundStyle(Color.clearest,Color.pinkest)
             }
             .frame(width: 44)
-          
-          
+                
+                
             case .downloaded: Button {
                 action()
             } label: {
@@ -175,7 +184,7 @@ struct ButtonPlayerView: View {
                     .foregroundStyle(Color.clearest,Color.pinkest)
                     .frame(width: 44)
             }
-        
+                
             case .playing: Button {
                 action()
             } label: {
@@ -185,7 +194,7 @@ struct ButtonPlayerView: View {
                     .foregroundStyle(Color.clearest,Color.pinkest)
                     .frame(width: 44)
             }
-         
+                
             case .pause: Button {
                 action()
             } label: {
