@@ -77,25 +77,6 @@ final class DetailEpisodeViewModel: ObservableObject {
     }
 }
 
-enum AudioRate:String,CaseIterable {
-    case x0_9 = "0.9x", x1_0 = "1x", x1_1 = "1.1x", x1_25 = "1.25x", x1_50 = "1.5x", x1_75 = "1.75x", x2_0  = "2x"
-    
-    var selected: Float {
-        switch self {
-        case .x0_9: 0.9
-        case .x1_0: 1.0
-        case .x1_1: 1.1
-        case .x1_25: 1.25
-        case .x1_50: 1.50
-        case .x1_75: 1.75
-        case .x2_0: 2.0
-        }
-    }
-    
-    var id: Self {
-        self
-    }
 
-}
 
 

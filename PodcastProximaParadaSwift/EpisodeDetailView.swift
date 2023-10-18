@@ -26,6 +26,7 @@ struct EpisodeDetailView: View {
                 Text(vm.episode.title)
                     .font(.largeTitle)
                     .foregroundStyle(Color.pinkest)
+                    .padding(.horizontal)
                 ScrollView {
                     Text(vm.episode.content)
                       
@@ -117,7 +118,7 @@ struct EpisodeDetailView: View {
                 .foregroundStyle(Color.clear1)
                 
                 TextEditor(text: $vm.episode.comments)
-                    .frame(height: 200)
+                    .frame(height: 100)
                     .background(RoundedRectangle(cornerRadius: 10).stroke().foregroundStyle(Color.darkest).padding(-5))
                 
                     .foregroundStyle(Color.darker)

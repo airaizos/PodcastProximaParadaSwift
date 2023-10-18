@@ -32,14 +32,12 @@ final class EpisodesListViewModel: ObservableObject {
         let apiEpisodios = try await network.fetchJson(url: network.urls.episodes, type: [APIEpisodio].self)
         
         for epi in apiEpisodios {
-            
-            if let data = epi.content.rendered.data(using: .isoLatin2) ?? epi.content.rendered.data(using: .utf8),
-               let attributedString = try? AttributedString.init(NSAttributedString(data:data, options: [.documentType: NSAttributedString.DocumentType.html], documentAttributes: nil)) {
-                let content = attributedString
+     
+            let content = attributedTextFromHTML(epi.content.rendered) ?? "**No Content**"
                 
-                episodios.append(Episodio(id: epi.id, title: epi.title.rendered, content: String(content.characters),categories: epi.categories))
+            episodios.append(Episodio(id: epi.id, title: epi.title.rendered, content: String(content.characters),categories: epi.categories))
             }
-        }
+        
         return episodios
     }
 }

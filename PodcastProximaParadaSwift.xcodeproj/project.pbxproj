@@ -24,7 +24,6 @@
 		3A292E452AD6C40600908794 /* APIPostCategory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A292E442AD6C40600908794 /* APIPostCategory.swift */; };
 		3A32422E2ADFD29300635879 /* Todo.md in Resources */ = {isa = PBXBuildFile; fileRef = 3A32422D2ADFD29300635879 /* Todo.md */; };
 		3A3242302ADFD97D00635879 /* StepperPPSStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A32422F2ADFD97D00635879 /* StepperPPSStyle.swift */; };
-		3A3242322AE023F300635879 /* EpisodesList1.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A3242312AE023F300635879 /* EpisodesList1.swift */; };
 		3A3242342AE027B400635879 /* Container.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A3242332AE027B400635879 /* Container.swift */; };
 		3A36A7892AD55F2400968F50 /* URLExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A36A7882AD55F2400968F50 /* URLExtension.swift */; };
 		3A4974842ACD5272005890E5 /* PodcastProximaParadaSwiftApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A4974832ACD5272005890E5 /* PodcastProximaParadaSwiftApp.swift */; };
@@ -82,7 +81,6 @@
 		3A292E442AD6C40600908794 /* APIPostCategory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIPostCategory.swift; sourceTree = "<group>"; };
 		3A32422D2ADFD29300635879 /* Todo.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = Todo.md; sourceTree = "<group>"; };
 		3A32422F2ADFD97D00635879 /* StepperPPSStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StepperPPSStyle.swift; sourceTree = "<group>"; };
-		3A3242312AE023F300635879 /* EpisodesList1.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EpisodesList1.swift; sourceTree = "<group>"; };
 		3A3242332AE027B400635879 /* Container.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Container.swift; sourceTree = "<group>"; };
 		3A36A7882AD55F2400968F50 /* URLExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLExtension.swift; sourceTree = "<group>"; };
 		3A4974802ACD5272005890E5 /* PodcastProximaParadaSwift.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PodcastProximaParadaSwift.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -380,7 +378,6 @@
 				3ACA32242AD3436800CC28B7 /* Subviews */,
 				3A4974AE2ACD5A26005890E5 /* EpisodesListView.swift */,
 				3A4974B62ACDA9DF005890E5 /* ListView.swift */,
-				3A3242312AE023F300635879 /* EpisodesList1.swift */,
 			);
 			name = View;
 			sourceTree = "<group>";
@@ -541,7 +538,6 @@
 				3A292E372AD6BD0E00908794 /* EpisodeCellView.swift in Sources */,
 				3A4974862ACD5272005890E5 /* ContentView.swift in Sources */,
 				3A18D6F52ADD4D9F00F09C16 /* AboutView.swift in Sources */,
-				3A3242322AE023F300635879 /* EpisodesList1.swift in Sources */,
 				3A292E3D2AD6BE4B00908794 /* AudioFile.swift in Sources */,
 				3A292E432AD6C36A00908794 /* CategoriesViewModel.swift in Sources */,
 				3A87AEAD2ADEA838003B8109 /* ReproductorControlsView.swift in Sources */,
