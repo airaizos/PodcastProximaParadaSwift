@@ -14,17 +14,18 @@ struct EpisodesListView: View {
     @StateObject var vm = EpisodesListViewModel()
     @State private var sortOrder = SortDescriptor(\Episodio.id, order: .forward)
     @State private var searchText = ""
+    @State private var orderUp = true
     
     var body: some View {
         NavigationStack {
             ZStack{
                 ListView(sort: sortOrder,searchString: searchText)
-                   // .searchable(text: $searchText)
+                    .searchable(text: $searchText)
                     .navigationDestination(for: Episodio.self) { value in
                         EpisodeDetailView(vm: DetailEpisodeViewModel(episode: value))
                     }
             }
-            .navigationTitle("Episodes")
+            .navigationTitle("Episodios")
             .toolbar {
                     Button {
                         Task {
@@ -41,9 +42,11 @@ struct EpisodesListView: View {
                     }
                     
                     //.disabled(!episodes.isEmpty)
-                    
+                    .onChange(of: sortOrder) { _,_ in
+                        orderUp.toggle()
+                    }
 
-                Menu("Ordenar", systemImage: "arrow.up.arrow.down") {
+                Menu("Ordenar", systemImage: orderUp ? "arrow.up" : "arrow.down") {
                     Picker("Sort", selection: $sortOrder) {
                         Text("↑")
                             .tag(SortDescriptor(\Episodio.id,order: .forward))
@@ -51,6 +54,7 @@ struct EpisodesListView: View {
                             .tag(SortDescriptor(\Episodio.id, order: .reverse))
                     }
                 }
+               
                     Button {
                         deleteAllItems()
                     } label: {

@@ -75,7 +75,7 @@ struct CategoriesView: View {
                 }
                 .frame(height: 60)
                 List(episodios) { episodio in
-                    EpisodeCellView(episode: episodio, color: Color.clearest)
+                    EpisodeCellView(vm: DetailEpisodeViewModel(episode: episodio), color: Color.clearest)
                 }
                 .listStyle(.inset)
                 Divider()

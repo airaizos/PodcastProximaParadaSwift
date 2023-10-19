@@ -13,8 +13,6 @@ struct EpisodeDetailView: View {
     @Environment(\.dismiss) var dismiss
     @ObservedObject var vm: DetailEpisodeViewModel
     
-    @State var time = 0.0
-    
     @State var audioFileState = AudioFileState.none
     
     let player = AVPlayer()

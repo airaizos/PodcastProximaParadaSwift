@@ -16,7 +16,7 @@ struct ListView: View {
             List {
                 ForEach(episodes) { episode in
                     NavigationLink(value: episode) {
-                        EpisodeCellView(episode: episode, color: Color.clear1)
+                        EpisodeCellView(vm: DetailEpisodeViewModel(episode: episode), color: Color.clear1)
                     }
                 }
                 .onDelete(perform: deleteItems)

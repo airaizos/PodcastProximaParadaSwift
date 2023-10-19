@@ -8,41 +8,35 @@
 import SwiftUI
 
 struct ButtonsStatusHStackView: View {
-    var played: Bool
-    var favorite: Bool
-    var downloaded: Bool
+    @ObservedObject var vm: DetailEpisodeViewModel
   
     var body: some View {
         HStack{
+            ShareLink("", item: vm.episode.link)
+            .frame(width: 44, height: 44)
+            .tint(Color.brown)
             Button {
-
+                vm.episode.played.toggle()
             } label: {
-                Image(systemName: "square.and.arrow.up")
-                    .foregroundStyle(Color.darkest)
+                Image(systemName: vm.episode.played  ? "checkmark" : "xmark")
+                
+                    .foregroundStyle(vm.episode.played ? Color.orange : Color.yellow)
             }
             .frame(width: 44, height: 44)
             
             Button {
-
-            } label: {
-                Image(systemName: played  ? "checkmark" : "xmark")
-                
-                    .foregroundStyle(played ? Color.orange : Color.yellow)
-            }
-            .frame(width: 44, height: 44)
-            
-            Button {
+                vm.episode.favorite.toggle()
             } label: {
                 
-                Image(systemName: favorite ? "heart" : "heart.slash")
-                    .foregroundStyle(favorite ? Color.red : Color.gray)
+                Image(systemName: vm.episode.favorite ? "heart" : "heart.slash")
+                    .foregroundStyle(vm.episode.favorite ? Color.red : Color.gray)
             }
             .frame(width: 44, height: 44)
             
             Spacer()
             Button {
             } label: {
-                Image(systemName: "arrow.down.circle")
+                Image(systemName: vm.isAudioEpisodeDownloaded() ? "checkmark" :"arrow.down.circle")
                     .foregroundStyle(Color.darkest)
             }
             .frame(width: 44, height: 44)
@@ -52,5 +46,5 @@ struct ButtonsStatusHStackView: View {
 }
 
 #Preview {
-    ButtonsStatusHStackView(played: true, favorite: false, downloaded: true)
+    ButtonsStatusHStackView(vm: DetailEpisodeViewModel(episode: .preview))
 }

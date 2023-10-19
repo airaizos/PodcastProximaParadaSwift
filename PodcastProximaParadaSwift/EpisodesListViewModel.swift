@@ -32,8 +32,7 @@ final class EpisodesListViewModel: ObservableObject {
         let apiEpisodios = try await network.fetchJson(url: network.urls.episodes, type: [APIEpisodio].self)
         
         for epi in apiEpisodios {
-     
-            episodios.append(Episodio(id: epi.id, title: epi.title.rendered, content: epi.content.rendered,categories: epi.categories, categoriesString: epi.categoriesString))
+            episodios.append(epi.episode)
             }
         
         return episodios

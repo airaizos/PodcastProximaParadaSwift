@@ -9,34 +9,35 @@ import SwiftUI
 import SwiftData
 
 struct EpisodeCellView: View {
-    var episode: Episodio
+    @ObservedObject var vm: DetailEpisodeViewModel
+    
     var color: Color
     var body: some View {
         ZStack{
             VStack(alignment: .leading) {
-            HStack{
-                Text("\(episode.id)")
-                    .font(.subheadline)
-                    .foregroundStyle(Color.secondary)
-                Text(episode.title)
-                    .font(.headline)
+                HStack{
+                    Text("\(vm.episode.id)")
+                        .font(.subheadline)
+                        .foregroundStyle(Color.secondary)
+                    Text(vm.episode.title)
+                        .font(.headline)
+                }
+                Text(vm.episode.categoriesView)
+                    .font(.caption2)
+                    .foregroundStyle(.secondary)
+                ButtonsStatusHStackView(vm: vm)
             }
-            Text(episode.categoriesView)
-                .font(.caption2)
-                .foregroundStyle(.secondary)
-            ButtonsStatusHStackView(played: episode.played, favorite: episode.favorite, downloaded: episode.audio.downloaded)
-        }
             .background(color.padding(.horizontal,-40).padding(.vertical,-10))
-    }
+        }
     }
 }
 
 #Preview {
     let container = ModelContainer.previewContainer
     let episode = Episodio.preview
-        container.mainContext.insert(episode)
+    container.mainContext.insert(episode)
     
-
-    return EpisodeCellView(episode: episode,color: Color.clear1)
+    
+    return EpisodeCellView(vm: DetailEpisodeViewModel(episode: .preview),color: Color.clear1)
         .modelContainer(container)
 }
