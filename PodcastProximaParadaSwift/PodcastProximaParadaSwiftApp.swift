@@ -31,7 +31,7 @@ struct PodcastProximaParadaSwiftApp: App {
                     .tabItem {
                         Image(systemName: "music.note.list")
                     }
-              
+                
                 CategoriesView()
                     .tabItem {
                         Image(systemName: "checklist.unchecked")
