@@ -9,8 +9,7 @@ import SwiftUI
 
 struct ListView: View {
     @Environment(\.modelContext) var context
-  //  @Query(filter:#Predicate{ $0.categories.contains(3)}, sort:\Episodio.id ,order:.reverse ) var episodes: [Episodio]
-    @Query(sort:\Episodio.id ,order:.reverse) var episodes: [Episodio]
+    @Query() var episodes: [Episodio]
   
     var body: some View {
         ZStack{
@@ -41,14 +40,15 @@ struct ListView: View {
    
     init(sort: SortDescriptor<Episodio>, searchString: String) {
      
-//        _episodes = Query(filter: #Predicate { episode in
-//           
-//           // episode.categories.contains(3) No funciona
-//         //   episode.title.contains("Episodio")
-//           
-//        },sort:[sort])
-        
-        _episodes = Query(sort:[sort])
+        _episodes = Query(filter: #Predicate { episode in
+           
+            if searchString.isEmpty {
+              return episode.categoriesString.contains("3")
+            } else {
+               return episode.categoriesString.contains("3") && episode.title.localizedStandardContains(searchString)
+            }
+           
+        },sort:[sort])
     }
 }
 

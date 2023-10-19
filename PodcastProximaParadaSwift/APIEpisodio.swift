@@ -13,3 +13,14 @@ struct APIEpisodio: Codable {
     let categories: [Int]
     let content: Rendered
 }
+
+
+extension APIEpisodio {
+    
+    var categoriesString: String {
+        categories.reduce("") { "\($0)-\($1)" }
+    }
+    var episode: Episodio{
+        Episodio(id: id, title: title.rendered, content: content.rendered, categories: categories, categoriesString:  categoriesString)
+    }
+}

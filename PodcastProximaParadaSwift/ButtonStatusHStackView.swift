@@ -11,12 +11,11 @@ struct ButtonsStatusHStackView: View {
     var played: Bool
     var favorite: Bool
     var downloaded: Bool
-    var action: () -> ()
+  
     var body: some View {
         HStack{
             Button {
-               action()
-                print("shared")
+
             } label: {
                 Image(systemName: "square.and.arrow.up")
                     .foregroundStyle(Color.darkest)
@@ -24,8 +23,7 @@ struct ButtonsStatusHStackView: View {
             .frame(width: 44, height: 44)
             
             Button {
-                action()
-                print("played")
+
             } label: {
                 Image(systemName: played  ? "checkmark" : "xmark")
                 
@@ -34,8 +32,6 @@ struct ButtonsStatusHStackView: View {
             .frame(width: 44, height: 44)
             
             Button {
-                action()
-                print("favorite")
             } label: {
                 
                 Image(systemName: favorite ? "heart" : "heart.slash")
@@ -45,8 +41,6 @@ struct ButtonsStatusHStackView: View {
             
             Spacer()
             Button {
-                action()
-                print("descarga")
             } label: {
                 Image(systemName: "arrow.down.circle")
                     .foregroundStyle(Color.darkest)
@@ -58,5 +52,5 @@ struct ButtonsStatusHStackView: View {
 }
 
 #Preview {
-    ButtonsStatusHStackView(played: true, favorite: false, downloaded: true) { }
+    ButtonsStatusHStackView(played: true, favorite: false, downloaded: true)
 }

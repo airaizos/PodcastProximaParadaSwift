@@ -12,15 +12,14 @@ struct EpisodesListView: View {
     @Environment(\.modelContext) var context
     @Query(sort:\Episodio.id, order: .reverse) var episodes: [Episodio]
     @StateObject var vm = EpisodesListViewModel()
-    @State private var sortOrder = SortDescriptor(\Episodio.id)
-
+    @State private var sortOrder = SortDescriptor(\Episodio.id, order: .forward)
     @State private var searchText = ""
     
     var body: some View {
         NavigationStack {
             ZStack{
                 ListView(sort: sortOrder,searchString: searchText)
-                    .searchable(text: $searchText)
+                   // .searchable(text: $searchText)
                     .navigationDestination(for: Episodio.self) { value in
                         EpisodeDetailView(vm: DetailEpisodeViewModel(episode: value))
                     }
@@ -30,13 +29,12 @@ struct EpisodesListView: View {
                     Button {
                         Task {
                             let epDescargados = try await vm.fetchEpisodes()
-                            print("ANTES",episodes.count)
+                          
                             for episode in epDescargados {
                                 if !episodes.contains(where: { $0.id == episode.id }) {
                                     context.insert(episode)
                                 }
                             }
-                            print("DESPUÉS",episodes.count)
                         }
                     } label: {
                         Image(systemName: "arrow.clockwise")
@@ -44,12 +42,13 @@ struct EpisodesListView: View {
                     
                     //.disabled(!episodes.isEmpty)
                     
+
                 Menu("Ordenar", systemImage: "arrow.up.arrow.down") {
                     Picker("Sort", selection: $sortOrder) {
-                        Text("Id")
-                            .tag(SortDescriptor(\Episodio.id))
-                        Text("Título")
-                            .tag(SortDescriptor(\Episodio.title))
+                        Text("↑")
+                            .tag(SortDescriptor(\Episodio.id,order: .forward))
+                        Text("↓")
+                            .tag(SortDescriptor(\Episodio.id, order: .reverse))
                     }
                 }
                     Button {
@@ -61,10 +60,7 @@ struct EpisodesListView: View {
                 Divider()
                     .background(Color.clear1)
             }
-            
-          
         }
-       
     }
     func deleteAllItems() {
         for episode in episodes {

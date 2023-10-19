@@ -13,8 +13,8 @@ struct CategoriesView: View {
     @Query(filter: #Predicate { $0.id != 41 },sort: \PostCategory.name) var categories: [PostCategory]
     @Query(filter: #Predicate<Episodio> {
         //filtrar los episodios
-        $0.title.contains("Episodio")
-
+      //  $0.title.contains("Epi")
+        $0.categoriesString.contains("9")
     },sort:\Episodio.id, order:.reverse) var episodios: [Episodio]
     
     @StateObject var vm = CategoriesViewModel()
@@ -30,6 +30,7 @@ struct CategoriesView: View {
             VStack{
                 Button{
                     Task {
+                        print(episodios.map { $0.categoriesString})
                         let categories = try await vm.fetchCategories()
                         for category in categories {
                             context.insert(category)

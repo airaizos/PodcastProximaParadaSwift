@@ -24,18 +24,10 @@ struct EpisodeCellView: View {
             Text(episode.categoriesView)
                 .font(.caption2)
                 .foregroundStyle(.secondary)
-            ButtonsStatusHStackView(played: episode.played, favorite: episode.favorite, downloaded: episode.audio.downloaded) {
-                
-            }
-            Text(episode.attributedContent(dark: true))
-                .lineLimit(2)
-                .font(.caption2)
-            Text("\(episode.audio.duration.formatted(.time(pattern: .minuteSecond)))")
+            ButtonsStatusHStackView(played: episode.played, favorite: episode.favorite, downloaded: episode.audio.downloaded)
         }
             .background(color.padding(.horizontal,-40).padding(.vertical,-10))
-            
     }
-       
     }
 }
 

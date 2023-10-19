@@ -33,7 +33,7 @@ final class EpisodesListViewModel: ObservableObject {
         
         for epi in apiEpisodios {
      
-            episodios.append(Episodio(id: epi.id, title: epi.title.rendered, content: epi.content.rendered,categories: epi.categories))
+            episodios.append(Episodio(id: epi.id, title: epi.title.rendered, content: epi.content.rendered,categories: epi.categories, categoriesString: epi.categoriesString))
             }
         
         return episodios
