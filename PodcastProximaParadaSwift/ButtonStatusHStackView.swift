@@ -35,6 +35,9 @@ struct ButtonsStatusHStackView: View {
             
             Spacer()
             Button {
+                Task {
+                   try await vm.saveAudioData()
+                }
             } label: {
                 Image(systemName: vm.isAudioEpisodeDownloaded() ? "checkmark" :"arrow.down.circle")
                     .foregroundStyle(Color.darkest)

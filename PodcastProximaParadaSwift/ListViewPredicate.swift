@@ -52,7 +52,3 @@ struct ListViewPredicate: View {
             .modelContainer(container)
     }
 }
-
-
-
-

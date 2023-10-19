@@ -147,6 +147,7 @@
 		3A18D6E92ADD4AD600F09C16 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				3A2A542B2AE1733F0089D1A9 /* ListViewPredicate.swift */,
 				3A292E402AD6C1E700908794 /* CategoriesView.swift */,
 			);
 			name = View;
@@ -391,7 +392,6 @@
 				3ACA32242AD3436800CC28B7 /* Subviews */,
 				3A4974AE2ACD5A26005890E5 /* EpisodesListView.swift */,
 				3A4974B62ACDA9DF005890E5 /* ListView.swift */,
-				3A2A542B2AE1733F0089D1A9 /* ListViewPredicate.swift */,
 			);
 			name = View;
 			sourceTree = "<group>";
