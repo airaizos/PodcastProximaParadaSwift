@@ -28,7 +28,10 @@ final class Network {
         switch res.statusCode == 200 {
         case true:
             do {
+                let df = DateFormatter()
+                df.dateFormat = "yyyy-MM-dd'T'HH:mm:ss"
                 
+                decoder.dateDecodingStrategy = .formatted(df)
                 return try decoder.decode(JSON.self, from: data)
                 
             } catch {

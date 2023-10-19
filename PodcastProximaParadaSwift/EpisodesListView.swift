@@ -12,7 +12,7 @@ struct EpisodesListView: View {
     @Environment(\.modelContext) var context
     @Query(sort:\Episodio.id, order: .reverse) var episodes: [Episodio]
     @ObservedObject var vm: EpisodesListViewModel
-    @State private var sortOrder = SortDescriptor(\Episodio.id, order: .reverse)
+    @State private var sortOrder = SortDescriptor(\Episodio.date, order: .reverse)
     @State private var searchText = ""
     @AppStorage("ORDER") private var orderUp = true
     
@@ -49,9 +49,9 @@ struct EpisodesListView: View {
                 Menu("Ordenar", systemImage: orderUp ? "arrow.up" : "arrow.down") {
                     Picker("Sort", selection: $sortOrder) {
                         Text("↑")
-                            .tag(SortDescriptor(\Episodio.id,order: .forward))
+                            .tag(SortDescriptor(\Episodio.date,order: .forward))
                         Text("↓")
-                            .tag(SortDescriptor(\Episodio.id, order: .reverse))
+                            .tag(SortDescriptor(\Episodio.date, order: .reverse))
                     }
                 }
                

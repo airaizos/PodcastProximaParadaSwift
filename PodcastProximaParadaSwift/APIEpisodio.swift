@@ -13,6 +13,7 @@ struct APIEpisodio: Codable {
     let categories: [Int]
     let content: Rendered
     let link: URL
+    let date: Date
 }
 
 
@@ -22,6 +23,6 @@ extension APIEpisodio {
         categories.reduce("") { "\($0)-\($1)" }
     }
     var episode: Episodio{
-        Episodio(id: id, title: title.rendered, content: content.rendered, categories: categories, categoriesString: categoriesString, link: link)
+        Episodio(id: id, title: title.rendered, content: content.rendered, categories: categories, categoriesString: categoriesString, link: link, date: date)
     }
 }

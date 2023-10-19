@@ -15,14 +15,9 @@ struct EpisodeCellView: View {
     var body: some View {
         ZStack{
             VStack(alignment: .leading) {
-                HStack{
-                    Text("\(vm.episode.id)")
-                        .font(.subheadline)
-                        .foregroundStyle(Color.secondary)
                     Text(vm.episode.title)
                         .font(.headline)
-                }
-                Text(vm.episode.categoriesView)
+                Text(vm.episode.date.formatted(date: .long, time: .omitted))
                     .font(.caption2)
                     .foregroundStyle(.secondary)
                 ButtonsStatusHStackView(vm: vm)

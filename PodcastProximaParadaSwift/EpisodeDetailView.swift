@@ -29,7 +29,6 @@ struct EpisodeDetailView: View {
                     } label: {
                         Image(systemName: "chevron.left")
                             .font(.title)
-                        
                     }
                     .frame(height: 44)
                     .padding(.horizontal)
@@ -40,6 +39,9 @@ struct EpisodeDetailView: View {
                     .foregroundStyle(Color.pinkest)
                     .padding(.horizontal,10)
                    
+                Text(vm.episode.date.formatted(date: .long, time: .omitted))
+                    .font(.footnote.bold())
+                    .foregroundStyle(Color.pink1)
                 ScrollView {
                     Text(vm.episode.attributedContent(dark: false))
                 }

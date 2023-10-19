@@ -45,8 +45,6 @@ struct SplashView: View {
         .blendMode(.plusDarker)
         .onAppear {
             Task {
-                
-                print(episodes.count)
                 let epDescargados = try await vm.fetchEpisodes(episodes)
                 
                 for episode in epDescargados {
@@ -54,8 +52,6 @@ struct SplashView: View {
                         context.insert(episode)
                     }
                 }
-                
-                
                 try await Task.sleep(for: .seconds(1))
                 navigationState = .episodes
             }
@@ -65,7 +61,12 @@ struct SplashView: View {
 }
 
 #Preview {
-    SplashView(vm: EpisodesListViewModel(),navigationState: .constant(.splash))
+    let container = ModelContainer.previewContainer
+    for e in Episodio.previewTenEpisodes {
+        container.mainContext.insert(e)
+    }
+    return SplashView(vm: EpisodesListViewModel(),navigationState: .constant(.splash))
+        .modelContainer(container)
 }
 
 struct RadialGradientView: View {

@@ -21,18 +21,20 @@ final class Episodio {
     let categories: [Int]
     let categoriesString: String
     let link: URL
+    let date: Date
     var played: Bool = false
     var favorite: Bool = false
     var comments: String = ""
     var audio: AudioFile = AudioFile(downloaded: false, pathAudio: "", timeInterval: 1445)
     
-    init(id: Int = 0, title: String = "", content: String = "", categories: [Int] = [], categoriesString: String = "", link: URL = .previewLink) {
+    init(id: Int = 0, title: String = "", content: String = "", categories: [Int] = [], categoriesString: String = "", link: URL = .previewLink, date: Date = Date()) {
         self.id = id
         self.title = title
         self.content = content
         self.categories = categories
         self.categoriesString = categoriesString
         self.link = link
+        self.date = date
     }
 }
 

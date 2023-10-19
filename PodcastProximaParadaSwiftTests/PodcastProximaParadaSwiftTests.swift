@@ -30,7 +30,7 @@ final class PodcastProximaParadaSwiftTests: XCTestCase {
     func test_isDownloadingEpisodes_() async throws {
         let episodio = try await network.fetchJson(url: urls.episodes, type: [APIEpisodio].self).first!
         
-        print(episodio.content.rendered)
+        print(episodio.date)
         XCTAssertNotNil(episodio)
     }
 
