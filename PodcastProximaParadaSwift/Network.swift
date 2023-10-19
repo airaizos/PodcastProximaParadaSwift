@@ -46,6 +46,20 @@ final class Network {
         
         return audioEpisodio.audioURL
     }
+    
+    /// Descarga todos los episodios que hay en el endPoint [episodes](https://proximaparadaswift.dev/wp-json/wp/v2/posts?per_page=10) y devuelve `[Episodio]`
+    func fetchEpisodes() async throws -> [Episodio] {
+        var episodios: [Episodio] = []
+        
+        let apiEpisodios = try await fetchJson(url: urls.episodes, type: [APIEpisodio].self)
+        
+        for epi in apiEpisodios {
+            episodios.append(epi.episode)
+            }
+        
+        return episodios
+    }
+    
 }
 
 

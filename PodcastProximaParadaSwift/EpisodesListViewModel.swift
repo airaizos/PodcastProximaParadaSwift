@@ -8,10 +8,10 @@
 import Foundation
 import AVFoundation
 /**
-
+ 
  ViewModel de la vista del **listado** de episodios
  
-Las funciones será descargar los datos de la API de wordpress del podcast [Proxima Parada Swift](www.proximaparadaswift.dev)
+ Las funciones será descargar los datos de la API de wordpress del podcast [Proxima Parada Swift](www.proximaparadaswift.dev)
  
  Necesita de la clase `Network` que es la que se encarga de la llamada a la red.
  
@@ -25,16 +25,20 @@ final class EpisodesListViewModel: ObservableObject {
         self.network = network
     }
     
-    /// Descarga todos los episodios que hay en el endPoint [episodes](https://proximaparadaswift.dev/wp-json/wp/v2/posts?per_page=10) y devuelve `[Episodio]`
-    func fetchEpisodes() async throws -> [Episodio] {
-        var episodios: [Episodio] = []
+    func fetchEpisodes(_ episodes: [Episodio]) async throws -> [Episodio] {
+        let lastEpisode = episodes.first?.id ?? 0
         
-        let apiEpisodios = try await network.fetchJson(url: network.urls.episodes, type: [APIEpisodio].self)
-        
-        for epi in apiEpisodios {
-            episodios.append(epi.episode)
+        do {
+            let lastPublishedEpisode = try await network.fetchJson(url: .lastPost, type: [APIEpisodio].self)
+            if let recentId = lastPublishedEpisode.first?.id, recentId > lastEpisode {
+                
+                return try await network.fetchEpisodes()
+            } else {
+                return []
             }
-        
-        return episodios
+        } catch {
+            return []
+        }
     }
 }
+

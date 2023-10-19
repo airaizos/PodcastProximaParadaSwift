@@ -12,7 +12,9 @@ import Foundation
  
  */
 extension URL {
-    static let episodes = URL(string:"https://proximaparadaswift.dev/wp-json/wp/v2/posts?per_page=25")!
+ //   static let episodes = URL(string:"https://proximaparadaswift.dev/wp-json/wp/v2/posts?per_page=25")!
+    
+    static let episodes = URL(string:"https://proximaparadaswift.dev/wp-json/wp/v2/posts?per_page=100")!
     
     static func episodeId(_ id: Int) -> URL { URL(string:"https://proximaparadaswift.dev/wp-json/wp/v2/posts/\(id)")!
     }
@@ -28,4 +30,6 @@ extension URL {
     static let enlaces = URL(string: "https://www.proximaparadaswift.dev/wp-json/wp/v2/pages/229")!
     
     static let logoSwift = URL(string: "https://www.proximaparadaswift.dev/wp-content/uploads/2023/09/swiftLogo.png")!
+    
+    static let lastPost = URL(string:"https://proximaparadaswift.dev/wp-json/wp/v2/posts?per_page=1")!
 }

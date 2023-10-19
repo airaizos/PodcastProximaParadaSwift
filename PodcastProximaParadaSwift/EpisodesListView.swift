@@ -14,7 +14,7 @@ struct EpisodesListView: View {
     @StateObject var vm = EpisodesListViewModel()
     @State private var sortOrder = SortDescriptor(\Episodio.id, order: .forward)
     @State private var searchText = ""
-    @State private var orderUp = true
+    @AppStorage("ORDER") private var orderUp = true
     
     var body: some View {
         NavigationStack {
@@ -25,11 +25,11 @@ struct EpisodesListView: View {
                         EpisodeDetailView(vm: DetailEpisodeViewModel(episode: value))
                     }
             }
-            .navigationTitle("Episodios")
+            .navigationTitle("\(episodes.count) Episodios")
             .toolbar {
                     Button {
                         Task {
-                            let epDescargados = try await vm.fetchEpisodes()
+                            let epDescargados = try await vm.fetchEpisodes(episodes)
                           
                             for episode in epDescargados {
                                 if !episodes.contains(where: { $0.id == episode.id }) {
@@ -45,7 +45,19 @@ struct EpisodesListView: View {
                     .onChange(of: sortOrder) { _,_ in
                         orderUp.toggle()
                     }
-
+                    .onAppear {
+                        print(episodes.count)
+                        Task {
+                            let epDescargados = try await vm.fetchEpisodes(episodes)
+                            
+                            for episode in epDescargados {
+                                if !episodes.contains(where: { $0.id == episode.id }) {
+                                    context.insert(episode)
+                                }
+                            }
+                        }
+                    }
+                
                 Menu("Ordenar", systemImage: orderUp ? "arrow.up" : "arrow.down") {
                     Picker("Sort", selection: $sortOrder) {
                         Text("↑")
