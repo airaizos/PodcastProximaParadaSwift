@@ -22,6 +22,7 @@
 		3A292E412AD6C1E700908794 /* CategoriesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A292E402AD6C1E700908794 /* CategoriesView.swift */; };
 		3A292E432AD6C36A00908794 /* CategoriesViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A292E422AD6C36A00908794 /* CategoriesViewModel.swift */; };
 		3A292E452AD6C40600908794 /* APIPostCategory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A292E442AD6C40600908794 /* APIPostCategory.swift */; };
+		3A2A542C2AE1733F0089D1A9 /* ListViewPredicate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A2A542B2AE1733F0089D1A9 /* ListViewPredicate.swift */; };
 		3A32422E2ADFD29300635879 /* Todo.md in Resources */ = {isa = PBXBuildFile; fileRef = 3A32422D2ADFD29300635879 /* Todo.md */; };
 		3A3242302ADFD97D00635879 /* StepperPPSStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A32422F2ADFD97D00635879 /* StepperPPSStyle.swift */; };
 		3A3242342AE027B400635879 /* Container.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A3242332AE027B400635879 /* Container.swift */; };
@@ -80,6 +81,7 @@
 		3A292E402AD6C1E700908794 /* CategoriesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoriesView.swift; sourceTree = "<group>"; };
 		3A292E422AD6C36A00908794 /* CategoriesViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoriesViewModel.swift; sourceTree = "<group>"; };
 		3A292E442AD6C40600908794 /* APIPostCategory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIPostCategory.swift; sourceTree = "<group>"; };
+		3A2A542B2AE1733F0089D1A9 /* ListViewPredicate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ListViewPredicate.swift; sourceTree = "<group>"; };
 		3A32422D2ADFD29300635879 /* Todo.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = Todo.md; sourceTree = "<group>"; };
 		3A32422F2ADFD97D00635879 /* StepperPPSStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StepperPPSStyle.swift; sourceTree = "<group>"; };
 		3A3242332AE027B400635879 /* Container.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Container.swift; sourceTree = "<group>"; };
@@ -389,6 +391,7 @@
 				3ACA32242AD3436800CC28B7 /* Subviews */,
 				3A4974AE2ACD5A26005890E5 /* EpisodesListView.swift */,
 				3A4974B62ACDA9DF005890E5 /* ListView.swift */,
+				3A2A542B2AE1733F0089D1A9 /* ListViewPredicate.swift */,
 			);
 			name = View;
 			sourceTree = "<group>";
@@ -552,6 +555,7 @@
 				3A292E3D2AD6BE4B00908794 /* AudioFile.swift in Sources */,
 				3A292E432AD6C36A00908794 /* CategoriesViewModel.swift in Sources */,
 				3A39E62B2AE126FE00FA9182 /* EpisodePreviewExtension.swift in Sources */,
+				3A2A542C2AE1733F0089D1A9 /* ListViewPredicate.swift in Sources */,
 				3A87AEAD2ADEA838003B8109 /* ReproductorControlsView.swift in Sources */,
 				3A4974B42ACD94A7005890E5 /* EpisodeDetailView.swift in Sources */,
 				3A7E8BB82ACF157900CE1459 /* AudioEpisode.swift in Sources */,

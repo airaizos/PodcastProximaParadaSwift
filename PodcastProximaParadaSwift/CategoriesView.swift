@@ -12,80 +12,65 @@ struct CategoriesView: View {
     @Environment(\.modelContext) var context
     @Query(filter: #Predicate { $0.id != 41 },sort: \PostCategory.name) var categories: [PostCategory]
     @Query(filter: #Predicate<Episodio> {
-        //filtrar los episodios
-      //  $0.title.contains("Epi")
-        $0.categoriesString.contains("9")
-    },sort:\Episodio.id, order:.reverse) var episodios: [Episodio]
+        $0.categoriesString.contains("3")
+    },sort:\Episodio.id, order:.reverse) var episodes: [Episodio]
     
-    @StateObject var vm = CategoriesViewModel()
     var columns:[GridItem] = [GridItem(.fixed(50))]
-    @State private var sortOrder = SortDescriptor(\Episodio.id)
-    @State private var searchText = ""
-    @State private var episodePredicate = #Predicate<Episodio> { [3].contains($0.categories) }
     
-    @State var showEpisodes = false
+    @State var selectedCategory = 3
+    @State private var filter = #Predicate<Episodio> { $0.id != 41 }
     
     var body: some View {
-        ZStack{
-            VStack{
-                Button{
-                    Task {
-                        print(episodios.map { $0.categoriesString})
-                        let categories = try await vm.fetchCategories()
-                        for category in categories {
-                            context.insert(category)
-                        }
-                    }
-                } label: {
-                    ZStack{
-                        Image("episodes")
-                            .resizable()
-                            .scaledToFit()
-                            .clipShape(Circle())
-                            .zIndex(1)
-                        Circle().stroke(lineWidth: 2).blur(radius: 7)
-                            .zIndex(0)
-                    }
-                }
-                .disabled(!categories.isEmpty)
-                .frame(width: 150)
-                Text("Categorías Episodios")
-                    .font(.largeTitle)
-                    .bold()
-                ScrollView(.horizontal) {
-                    LazyHGrid(rows: columns,alignment: .center, spacing: 20) {
-                        ForEach(categories) { category in
-                            Button {
-                                showEpisodes.toggle()
-                            } label: {
-                                ZStack{
-                                    VStack {
-                                        Text(category.name == "episodios" ? "Todos" : category.name)
-                                            .font(.subheadline.bold())
-                                        Text("\(category.count)")
-                                            .font(.callout)
-                                            .foregroundStyle(.secondary)
+        NavigationStack{
+            ZStack{
+                VStack {
+                    CategoriesButtonTitleView()
+                    Text("Categorías Episodios")
+                        .font(.largeTitle)
+                        .bold()
+                    ScrollView(.horizontal) {
+                        LazyHGrid(rows: columns,alignment: .center, spacing: 20) {
+                            ForEach(categories) { category in
+                                Button {
+                                    selectedCategory = category.id
+                                } label: {
+                                    ZStack{
+                                        VStack {
+                                            Text(category.name == "episodios" ? "Todos" : category.name)
+                                                .font(.subheadline.bold())
+                                            Text("\(category.count)")
+                                                .font(.callout)
+                                                .foregroundStyle(.secondary)
+                                        }
                                     }
                                 }
+                                .buttonStyle(.borderedProminent)
+                                .tint(Color.gray)
                             }
-                            .buttonStyle(.borderedProminent)
-                            .tint(Color.gray)
                         }
                     }
+                    .frame(height: 60)
+                    
+                    ListViewPredicate(filter: filter, sort: SortDescriptor(\Episodio.id, order: .forward), searchString: "")
+                        .listStyle(.inset)
+                    Divider()
+                        .background(Color.clearest)
                 }
-                .frame(height: 60)
-                List(episodios) { episodio in
-                    EpisodeCellView(vm: DetailEpisodeViewModel(episode: episodio), color: Color.clearest)
+                
+                .navigationDestination(for: Episodio.self) { value in
+                    EpisodeDetailView(vm: DetailEpisodeViewModel(episode: value))
                 }
-                .listStyle(.inset)
-                Divider()
-                    .background(Color.clearest)
+                .onChange(of: selectedCategory) { _,newValue in
+                    
+                    filter = #Predicate<Episodio> { $0.categoriesString.contains("\(newValue)")}
+                }
+                
+                Color.clearest
+                    .ignoresSafeArea()
+                    .zIndex(-1)
             }
-            Color.clearest
-                .ignoresSafeArea()
-                .zIndex(-1)
         }
-        }
+    }
 }
 
 #Preview {
@@ -93,7 +78,7 @@ struct CategoriesView: View {
     for e in Episodio.previewTenEpisodes {
         container.mainContext.insert(e)
     }
-    return CategoriesView(vm:CategoriesViewModelMock())
+    return CategoriesView()
         .modelContainer(container)
 }
 
@@ -103,3 +88,32 @@ final class CategoriesViewModelMock: CategoriesViewModel {
     }
 }
 
+
+struct CategoriesButtonTitleView: View {
+    @Environment(\.modelContext) var context
+    @Query(filter: #Predicate { $0.id != 41 },sort: \PostCategory.name) var categories: [PostCategory]
+    
+    @StateObject var vm = CategoriesViewModel()
+    var body: some View {
+        Button {
+            Task {
+                let categories = try await vm.fetchCategories()
+                for category in categories {
+                    context.insert(category)
+                }
+            }
+        } label: {
+            ZStack{
+                Image("episodes")
+                    .resizable()
+                    .scaledToFit()
+                    .clipShape(Circle())
+                    .zIndex(1)
+                Circle().stroke(lineWidth: 2).blur(radius: 7)
+                    .zIndex(0)
+            }
+        }
+        .disabled(!categories.isEmpty)
+        .frame(width: 150)
+    }
+}
