@@ -23,7 +23,7 @@
 		3A292E432AD6C36A00908794 /* CategoriesViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A292E422AD6C36A00908794 /* CategoriesViewModel.swift */; };
 		3A292E452AD6C40600908794 /* APIPostCategory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A292E442AD6C40600908794 /* APIPostCategory.swift */; };
 		3A2A542C2AE1733F0089D1A9 /* ListViewPredicate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A2A542B2AE1733F0089D1A9 /* ListViewPredicate.swift */; };
-		3A2A542E2AE17C110089D1A9 /* UpdateEpisodesViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A2A542D2AE17C110089D1A9 /* UpdateEpisodesViewModel.swift */; };
+		3A2A54312AE18C780089D1A9 /* SplashView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A2A54302AE18C780089D1A9 /* SplashView.swift */; };
 		3A32422E2ADFD29300635879 /* Todo.md in Resources */ = {isa = PBXBuildFile; fileRef = 3A32422D2ADFD29300635879 /* Todo.md */; };
 		3A3242302ADFD97D00635879 /* StepperPPSStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A32422F2ADFD97D00635879 /* StepperPPSStyle.swift */; };
 		3A3242342AE027B400635879 /* Container.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A3242332AE027B400635879 /* Container.swift */; };
@@ -83,7 +83,7 @@
 		3A292E422AD6C36A00908794 /* CategoriesViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoriesViewModel.swift; sourceTree = "<group>"; };
 		3A292E442AD6C40600908794 /* APIPostCategory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIPostCategory.swift; sourceTree = "<group>"; };
 		3A2A542B2AE1733F0089D1A9 /* ListViewPredicate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ListViewPredicate.swift; sourceTree = "<group>"; };
-		3A2A542D2AE17C110089D1A9 /* UpdateEpisodesViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpdateEpisodesViewModel.swift; sourceTree = "<group>"; };
+		3A2A54302AE18C780089D1A9 /* SplashView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashView.swift; sourceTree = "<group>"; };
 		3A32422D2ADFD29300635879 /* Todo.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = Todo.md; sourceTree = "<group>"; };
 		3A32422F2ADFD97D00635879 /* StepperPPSStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StepperPPSStyle.swift; sourceTree = "<group>"; };
 		3A3242332AE027B400635879 /* Container.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Container.swift; sourceTree = "<group>"; };
@@ -285,6 +285,14 @@
 			name = Design;
 			sourceTree = "<group>";
 		};
+		3A2A542F2AE18A770089D1A9 /* LaunchScreen */ = {
+			isa = PBXGroup;
+			children = (
+				3A2A54302AE18C780089D1A9 /* SplashView.swift */,
+			);
+			name = LaunchScreen;
+			sourceTree = "<group>";
+		};
 		3A36A7872AD55F1600968F50 /* Helpers */ = {
 			isa = PBXGroup;
 			children = (
@@ -327,8 +335,8 @@
 		3A4974822ACD5272005890E5 /* PodcastProximaParadaSwift */ = {
 			isa = PBXGroup;
 			children = (
+				3A2A542F2AE18A770089D1A9 /* LaunchScreen */,
 				3A4974832ACD5272005890E5 /* PodcastProximaParadaSwiftApp.swift */,
-				3A2A542D2AE17C110089D1A9 /* UpdateEpisodesViewModel.swift */,
 				3A18D6F02ADD4B5600F09C16 /* Episodes */,
 				3A18D6EC2ADD4AFA00F09C16 /* Detail */,
 				3A18D6E82ADD4ACC00F09C16 /* Categories */,
@@ -570,7 +578,6 @@
 				3A18D7032ADD589F00F09C16 /* CommonsFunctions.swift in Sources */,
 				3A292E3F2AD6BFD900908794 /* PostCategory.swift in Sources */,
 				3A49749F2ACD54C6005890E5 /* URLProduction.swift in Sources */,
-				3A2A542E2AE17C110089D1A9 /* UpdateEpisodesViewModel.swift in Sources */,
 				3A49749A2ACD53BC005890E5 /* Interface.swift in Sources */,
 				3A3242342AE027B400635879 /* Container.swift in Sources */,
 				3ACA32262AD3438300CC28B7 /* ButtonStatusHStackView.swift in Sources */,
@@ -591,6 +598,7 @@
 				3A18D7012ADD581A00F09C16 /* EnlacesViewModel.swift in Sources */,
 				3A292E452AD6C40600908794 /* APIPostCategory.swift in Sources */,
 				3A18D6F82ADD4F0200F09C16 /* AboutViewModel.swift in Sources */,
+				3A2A54312AE18C780089D1A9 /* SplashView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

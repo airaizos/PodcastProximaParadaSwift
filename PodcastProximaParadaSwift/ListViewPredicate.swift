@@ -9,7 +9,7 @@ import SwiftUI
 
 struct ListViewPredicate: View {
     @Environment(\.modelContext) var context
-    @Query() var episodes: [Episodio]
+    @Query(sort:\Episodio.id, order: .reverse) var episodes: [Episodio]
   
     var body: some View {
         ZStack{

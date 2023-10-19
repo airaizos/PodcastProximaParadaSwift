@@ -12,7 +12,7 @@ struct EpisodesListView: View {
     @Environment(\.modelContext) var context
     @Query(sort:\Episodio.id, order: .reverse) var episodes: [Episodio]
     @StateObject var vm = EpisodesListViewModel()
-    @State private var sortOrder = SortDescriptor(\Episodio.id, order: .forward)
+    @State private var sortOrder = SortDescriptor(\Episodio.id, order: .reverse)
     @State private var searchText = ""
     @AppStorage("ORDER") private var orderUp = true
     
@@ -41,7 +41,6 @@ struct EpisodesListView: View {
                         Image(systemName: "arrow.clockwise")
                     }
                     
-                    //.disabled(!episodes.isEmpty)
                     .onChange(of: sortOrder) { _,_ in
                         orderUp.toggle()
                     }
