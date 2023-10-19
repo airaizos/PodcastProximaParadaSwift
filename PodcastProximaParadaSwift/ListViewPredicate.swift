@@ -22,7 +22,7 @@ struct ListViewPredicate: View {
                 .onDelete(perform: deleteItems)
             }
             .listStyle(.inset)
-            .background(Color.clear1)
+            .background(Color.clearest)
             .scrollContentBackground(.hidden)
             Color.clearest
                 .ignoresSafeArea()

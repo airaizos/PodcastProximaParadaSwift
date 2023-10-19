@@ -10,32 +10,15 @@ import SwiftData
 
 @main
 struct PodcastProximaParadaSwiftApp: App {
-   
+    @State var navigationState: NavigationState = .splash
     
     var body: some Scene {
         WindowGroup {
-            TabView {
-                EpisodesListView()
-                    .tabItem {
-                        Image(systemName: "music.note.list")
-                    }
-                
-                CategoriesView()
-                    .tabItem {
-                        Image(systemName: "checklist.unchecked")
-                    }
-                 
-                EnlacesView()
-                    .tabItem {
-                        Image(systemName: "link")
-                    }
-                AboutView()
-                    .tabItem {
-                        Image(systemName: "info")
-                    }
-            }
-            .modelContainer(.shared)
-            .tint(Color.darkest)
+            InitialView(navigationState: $navigationState)
         }
     }
+}
+
+enum NavigationState {
+    case splash, episodes
 }

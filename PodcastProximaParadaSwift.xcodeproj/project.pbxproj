@@ -24,6 +24,7 @@
 		3A292E452AD6C40600908794 /* APIPostCategory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A292E442AD6C40600908794 /* APIPostCategory.swift */; };
 		3A2A542C2AE1733F0089D1A9 /* ListViewPredicate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A2A542B2AE1733F0089D1A9 /* ListViewPredicate.swift */; };
 		3A2A54312AE18C780089D1A9 /* SplashView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A2A54302AE18C780089D1A9 /* SplashView.swift */; };
+		3A2A54332AE1917E0089D1A9 /* InitialView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A2A54322AE1917E0089D1A9 /* InitialView.swift */; };
 		3A32422E2ADFD29300635879 /* Todo.md in Resources */ = {isa = PBXBuildFile; fileRef = 3A32422D2ADFD29300635879 /* Todo.md */; };
 		3A3242302ADFD97D00635879 /* StepperPPSStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A32422F2ADFD97D00635879 /* StepperPPSStyle.swift */; };
 		3A3242342AE027B400635879 /* Container.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A3242332AE027B400635879 /* Container.swift */; };
@@ -52,6 +53,7 @@
 		3A87AEAD2ADEA838003B8109 /* ReproductorControlsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A87AEAC2ADEA838003B8109 /* ReproductorControlsView.swift */; };
 		3A87AEAF2ADEA863003B8109 /* PlaybackState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A87AEAE2ADEA863003B8109 /* PlaybackState.swift */; };
 		3A87AEB22ADEF8E9003B8109 /* TogglePPSStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A87AEB12ADEF8E9003B8109 /* TogglePPSStyle.swift */; };
+		3AA900AC2AE1A49800431CD2 /* MainTabView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AA900AB2AE1A49800431CD2 /* MainTabView.swift */; };
 		3ACA32232AD33BDC00CC28B7 /* ReadMe.md in Resources */ = {isa = PBXBuildFile; fileRef = 3ACA32222AD33BDC00CC28B7 /* ReadMe.md */; };
 		3ACA32262AD3438300CC28B7 /* ButtonStatusHStackView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3ACA32252AD3438300CC28B7 /* ButtonStatusHStackView.swift */; };
 /* End PBXBuildFile section */
@@ -84,6 +86,7 @@
 		3A292E442AD6C40600908794 /* APIPostCategory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIPostCategory.swift; sourceTree = "<group>"; };
 		3A2A542B2AE1733F0089D1A9 /* ListViewPredicate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ListViewPredicate.swift; sourceTree = "<group>"; };
 		3A2A54302AE18C780089D1A9 /* SplashView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashView.swift; sourceTree = "<group>"; };
+		3A2A54322AE1917E0089D1A9 /* InitialView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InitialView.swift; sourceTree = "<group>"; };
 		3A32422D2ADFD29300635879 /* Todo.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = Todo.md; sourceTree = "<group>"; };
 		3A32422F2ADFD97D00635879 /* StepperPPSStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StepperPPSStyle.swift; sourceTree = "<group>"; };
 		3A3242332AE027B400635879 /* Container.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Container.swift; sourceTree = "<group>"; };
@@ -114,6 +117,7 @@
 		3A87AEAC2ADEA838003B8109 /* ReproductorControlsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReproductorControlsView.swift; sourceTree = "<group>"; };
 		3A87AEAE2ADEA863003B8109 /* PlaybackState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaybackState.swift; sourceTree = "<group>"; };
 		3A87AEB12ADEF8E9003B8109 /* TogglePPSStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TogglePPSStyle.swift; sourceTree = "<group>"; };
+		3AA900AB2AE1A49800431CD2 /* MainTabView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTabView.swift; sourceTree = "<group>"; };
 		3ACA32222AD33BDC00CC28B7 /* ReadMe.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = ReadMe.md; sourceTree = "<group>"; };
 		3ACA32252AD3438300CC28B7 /* ButtonStatusHStackView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ButtonStatusHStackView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -335,8 +339,10 @@
 		3A4974822ACD5272005890E5 /* PodcastProximaParadaSwift */ = {
 			isa = PBXGroup;
 			children = (
-				3A2A542F2AE18A770089D1A9 /* LaunchScreen */,
 				3A4974832ACD5272005890E5 /* PodcastProximaParadaSwiftApp.swift */,
+				3A2A54322AE1917E0089D1A9 /* InitialView.swift */,
+				3AA900AB2AE1A49800431CD2 /* MainTabView.swift */,
+				3A2A542F2AE18A770089D1A9 /* LaunchScreen */,
 				3A18D6F02ADD4B5600F09C16 /* Episodes */,
 				3A18D6EC2ADD4AFA00F09C16 /* Detail */,
 				3A18D6E82ADD4ACC00F09C16 /* Categories */,
@@ -581,8 +587,10 @@
 				3A49749A2ACD53BC005890E5 /* Interface.swift in Sources */,
 				3A3242342AE027B400635879 /* Container.swift in Sources */,
 				3ACA32262AD3438300CC28B7 /* ButtonStatusHStackView.swift in Sources */,
+				3A2A54332AE1917E0089D1A9 /* InitialView.swift in Sources */,
 				3A292E3B2AD6BE3600908794 /* Rendered.swift in Sources */,
 				3A87AEA92ADEA623003B8109 /* PlayerItemObserver.swift in Sources */,
+				3AA900AC2AE1A49800431CD2 /* MainTabView.swift in Sources */,
 				3A87AEAF2ADEA863003B8109 /* PlaybackState.swift in Sources */,
 				3A87AEB22ADEF8E9003B8109 /* TogglePPSStyle.swift in Sources */,
 				3A49749D2ACD5422005890E5 /* Network.swift in Sources */,
