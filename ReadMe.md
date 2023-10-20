@@ -27,3 +27,9 @@ Obtén un listado de enlaces que recomiendo para aprender Swift
 [Chat GP3](https://chat.openai.com)
 [AV Player & SwiftUI](https://chris-mash.medium.com/avplayer-swiftui-b87af6d0553)
 
+
+![Splash](https://github.com/airaizos/PodcastProximaParadaSwift/blob/e3f07fbf6a2d76ba468834db57bb9eea928ea269/1.png)
+![Episodios](https://github.com/airaizos/PodcastProximaParadaSwift/blob/e3f07fbf6a2d76ba468834db57bb9eea928ea269/2.png)
+![Categorias](https://github.com/airaizos/PodcastProximaParadaSwift/blob/e3f07fbf6a2d76ba468834db57bb9eea928ea269/3.png)
+![Enlaces](https://github.com/airaizos/PodcastProximaParadaSwift/blob/e3f07fbf6a2d76ba468834db57bb9eea928ea269/4.png)
+![AboutMe](https://github.com/airaizos/PodcastProximaParadaSwift/blob/e3f07fbf6a2d76ba468834db57bb9eea928ea269/5.png)
