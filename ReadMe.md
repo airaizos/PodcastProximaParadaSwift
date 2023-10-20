@@ -2,7 +2,7 @@
 
 Reproductor del podcast Próxima Parada Swift publicado en https://proximaparadaswift.dev
 
-Proyecto realizado con MVVM en SwiftUI, utilizando SwiftData, Combine, AVFoundation, Regex,
+Proyecto realizado con MVVM en SwiftUI, utilizando Observable, SwiftData, Combine, AVFoundation, Regex,
 
 ## Funcionalidades
 Ordena los episodios por fecha, búscalos por título o filtra por categoría
@@ -27,7 +27,3 @@ Obtén un listado de enlaces que recomiendo para aprender Swift
 [Chat GP3](https://chat.openai.com)
 [AV Player & SwiftUI](https://chris-mash.medium.com/avplayer-swiftui-b87af6d0553)
 
-
-## Por venir
-* Tests
-* Refactorizar a Observable
