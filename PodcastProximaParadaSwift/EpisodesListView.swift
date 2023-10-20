@@ -9,9 +9,11 @@ import SwiftData
 import SwiftUI
 
 struct EpisodesListView: View {
+    @Environment(EpisodesListViewModel.self) private var vm
+    
     @Environment(\.modelContext) var context
     @Query(sort:\Episodio.id, order: .reverse) var episodes: [Episodio]
-    @ObservedObject var vm: EpisodesListViewModel
+
     @State private var sortOrder = SortDescriptor(\Episodio.date, order: .reverse)
     @State private var searchText = ""
     @AppStorage("ORDER") private var orderUp = true
@@ -78,6 +80,7 @@ struct EpisodesListView: View {
     for e in Episodio.previewTenEpisodes {
         container.mainContext.insert(e)
     }
-    return EpisodesListView(vm: EpisodesListViewModel())
+    return EpisodesListView()
+        .environment(EpisodesListViewModel())
         .modelContainer(container)
 }

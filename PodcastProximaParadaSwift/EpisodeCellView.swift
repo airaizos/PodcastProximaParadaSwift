@@ -9,7 +9,7 @@ import SwiftUI
 import SwiftData
 
 struct EpisodeCellView: View {
-    @ObservedObject var vm: DetailEpisodeViewModel
+    @Bindable var vm: DetailEpisodeViewModel
     
     var color: Color
     var body: some View {

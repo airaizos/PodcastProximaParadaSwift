@@ -42,7 +42,6 @@ final class DetailEpisodeVMTEsts: XCTestCase {
     }
 
     func test_changeRate_initialRateShouldBeGrater() throws {
-        sut.stepRate = 1
         let initialRate = sut.rate + 1
         
         sut.changeRate(up: false)

@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct AboutView: View {
-    @StateObject var vm = AboutViewModel()
+    @State var vm = AboutViewModel()
     
     @State var text:AttributedString = ""
     

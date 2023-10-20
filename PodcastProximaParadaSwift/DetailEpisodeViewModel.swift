@@ -7,13 +7,13 @@
 
 import Foundation
 import AVFoundation
-
+import Observation
 /**
  ViewModel de la vista del detalle del Episodio al que se navega pasándole el parámetro `episode`
  
  */
-
-final class DetailEpisodeViewModel: ObservableObject {
+@Observable
+final class DetailEpisodeViewModel {
     let network: Network
     var episode: Episodio
     let fileManager: FileManager
@@ -22,10 +22,10 @@ final class DetailEpisodeViewModel: ObservableObject {
     
     private let rates: [Float] = [1,1.1,1.2,1.3,1.5,1.75,2]
     
-    @Published var stepRate = 0
-    @Published var rate: Float = 1.0
-    @Published var isPlaying: Bool = false
-    @Published var duration: ClosedRange<Date> = Date()...Date().addingTimeInterval(0)
+    private var stepRate = 0
+    var rate: Float = 1.0
+    var isPlaying: Bool = false
+    var duration: ClosedRange<Date> = Date()...Date().addingTimeInterval(0)
     
     init(episode: Episodio, network: Network = Network(), fileManager: FileManager = FileManager.default) {
         self.episode = episode
@@ -34,14 +34,16 @@ final class DetailEpisodeViewModel: ObservableObject {
     }
     
     func changeRate(up: Bool) {
-        if up && stepRate < rates.count-1 {
+        print("rate",rate,"stepRate",stepRate,"index",rates[stepRate],"count", rates.count)
+        if up && stepRate < rates.count - 1 {
             
             stepRate += 1
-            rate = rates[stepRate]
-        } else if !up && stepRate >= 0 {
+         
+        } else if !up && stepRate > 0 {
             stepRate -= 1
-            rate = rates[stepRate]
+           
         }
+        rate = rates[stepRate]
     }
     
     func isAudioEpisodeDownloaded() -> Bool {

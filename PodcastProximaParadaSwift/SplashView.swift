@@ -9,10 +9,9 @@ import SwiftUI
 import SwiftData
 
 struct SplashView: View {
+    @Environment(EpisodesListViewModel.self) private var vm
     @Environment(\.modelContext) var context
     @Query(sort:\Episodio.id, order: .reverse) var episodes: [Episodio]
-    
-    @ObservedObject var vm: EpisodesListViewModel
     
     @Binding var navigationState: NavigationState
     var body: some View {
@@ -65,7 +64,8 @@ struct SplashView: View {
     for e in Episodio.previewTenEpisodes {
         container.mainContext.insert(e)
     }
-    return SplashView(vm: EpisodesListViewModel(),navigationState: .constant(.splash))
+    return SplashView(navigationState: .constant(.splash))
+        .environment(EpisodesListViewModel())
         .modelContainer(container)
 }
 

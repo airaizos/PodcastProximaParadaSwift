@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct EnlacesView: View {
-    @StateObject var vm = EnlacesViewModel()
+    @State var vm = EnlacesViewModel()
     
     @State var text:AttributedString  = ""
     

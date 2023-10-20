@@ -9,16 +9,15 @@ import SwiftUI
 import SwiftData
 
 struct MainTabView: View {
-    @ObservedObject var vm: EpisodesListViewModel
     @Binding var navigationState: NavigationState
    
     var body: some View {
         TabView {
-            EpisodesListView(vm:vm)
+            EpisodesListView()
                 .tabItem {
                     Image(systemName: "music.note.list")
                 }
-            
+                .environment(EpisodesListViewModel())
             CategoriesView()
                 .tabItem {
                     Image(systemName: "checklist.unchecked")
@@ -39,5 +38,6 @@ struct MainTabView: View {
 }
 
 #Preview {
-    MainTabView(vm: EpisodesListViewModel(),navigationState: .constant(.episodes))
+    MainTabView(navigationState: .constant(.episodes))
+        .environment(EpisodesListViewModel())
 }

@@ -7,6 +7,7 @@
 
 import Foundation
 import AVFoundation
+import Observation
 /**
  
  ViewModel de la vista del **listado** de episodios
@@ -18,7 +19,8 @@ import AVFoundation
  **¿Debería reproducir el epsiodio desde aqui?**
  
  */
-final class EpisodesListViewModel: ObservableObject {
+@Observable
+final class EpisodesListViewModel {
     let network: Network
     
     init(network: Network = Network()) {

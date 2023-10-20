@@ -6,9 +6,10 @@
 //
 
 import SwiftUI
+import Observation
 
-
-final class EnlacesViewModel: ObservableObject {
+@Observable
+final class EnlacesViewModel{
     let network: Network
     
     init(network: Network = Network()) {

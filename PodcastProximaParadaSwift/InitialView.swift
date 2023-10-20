@@ -12,17 +12,16 @@ struct InitialView: View {
   
     @Namespace var namespace
     @Binding var navigationState: NavigationState
-    @StateObject var vm = EpisodesListViewModel()
-
-
     var body: some View {
         Group {
             switch navigationState {
-            case .splash: SplashView(vm: vm, navigationState: $navigationState)
+            case .splash: SplashView(navigationState: $navigationState)
+                    .environment(EpisodesListViewModel())
                     .modelContainer(.shared)
-            case .episodes: MainTabView(vm: vm,navigationState: $navigationState)
+            case .episodes: MainTabView(navigationState: $navigationState)
+                    .environment(EpisodesListViewModel())
             }
-             
+               
         }
        
     }

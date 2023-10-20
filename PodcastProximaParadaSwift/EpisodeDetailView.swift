@@ -11,7 +11,7 @@ import AVFoundation
 
 struct EpisodeDetailView: View {
     @Environment(\.dismiss) var dismiss
-    @ObservedObject var vm: DetailEpisodeViewModel
+    @Bindable var vm: DetailEpisodeViewModel
     
     @State var audioFileState = AudioFileState.none
     
@@ -46,7 +46,7 @@ struct EpisodeDetailView: View {
                     Text(vm.episode.attributedContent(dark: false))
                 }
                 .padding()
-                
+            
                 HStack {
                     ButtonPlayerView(state: $audioFileState) {
                         switch audioFileState {
@@ -77,6 +77,7 @@ struct EpisodeDetailView: View {
                                             durationObserver: PlayerDurationObserver(player: player),
                                             itemObserver: PlayerItemObserver(player: player))
                 }
+                
                 .padding(.horizontal)
                 .background(Color.darkest)
                 VStack {
@@ -84,10 +85,13 @@ struct EpisodeDetailView: View {
                         Text("Speed")
                         Spacer()
                         Text(" \(vm.rate,format: .number.precision(.integerLength(1)))x")
+                        
+                        
                             .padding(.trailing,20)
                             .monospacedDigit()
                             .foregroundStyle(vm.rate != 1 ? Color.pinkest : Color.clear1)
                         HStack(spacing: -13) {
+                            
                             
                             Button {
                                 vm.changeRate(up: false)
@@ -98,12 +102,13 @@ struct EpisodeDetailView: View {
                             }
                             .disabled(vm.rate == 1)
                             .buttonStyle(StepperPPSStyle())
+                            .buttonStyle(StepperPPSStyle())
                             Button("+") {
                                 vm.changeRate(up: true)
                                 player.rate = vm.rate
                                 
                             }
-                            .disabled(vm.stepRate == 6)
+                            .disabled(vm.rate == 2)
                         }
                         .buttonStyle(StepperPPSStyle())
                     }
@@ -112,8 +117,6 @@ struct EpisodeDetailView: View {
                     HStack {
                         Toggle("Escuchado", isOn: $vm.episode.played)
                         Toggle("Favorito", isOn: $vm.episode.favorite)
-                            .disabled(!vm.episode.played)
-                         
                     }
                     .tint(Color.pink1)
                     .padding(.vertical, 10)

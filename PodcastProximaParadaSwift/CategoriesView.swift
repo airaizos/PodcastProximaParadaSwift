@@ -93,7 +93,7 @@ struct CategoriesButtonTitleView: View {
     @Environment(\.modelContext) var context
     @Query(filter: #Predicate { $0.id != 41 },sort: \PostCategory.name) var categories: [PostCategory]
     
-    @StateObject var vm = CategoriesViewModel()
+    @State var vm = CategoriesViewModel()
     var body: some View {
         Button {
             Task {

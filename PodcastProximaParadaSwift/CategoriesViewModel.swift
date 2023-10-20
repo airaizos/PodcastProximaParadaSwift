@@ -6,8 +6,10 @@
 //
 
 import Foundation
+import Observation
 
-class CategoriesViewModel: ObservableObject {
+@Observable
+class CategoriesViewModel {
     let network: Network
     
     init(network: Network = Network()) {

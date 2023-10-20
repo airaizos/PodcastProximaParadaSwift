@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct ButtonsStatusHStackView: View {
-    @ObservedObject var vm: DetailEpisodeViewModel
+    @Bindable var vm: DetailEpisodeViewModel
   
     var body: some View {
         HStack{
