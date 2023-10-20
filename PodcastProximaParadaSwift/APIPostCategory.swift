@@ -11,4 +11,8 @@ struct APIPostCategory: Codable {
     let id: Int
     let name: String
     let count:Int
+    
+    var postCategory: PostCategory {
+        PostCategory(id: id, name: name, count: count)
+    }
 }

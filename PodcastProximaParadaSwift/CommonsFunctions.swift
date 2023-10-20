@@ -7,11 +7,10 @@
 
 import Foundation
 
-
+// Content
 func attributedTextFromHTML(_ html: String) -> AttributedString? {
-    guard let data = html.data(using: .utf8) else {
-        return nil
-    }
+    guard let data = html.data(using: .utf8) else { return nil }
+    
     do {
         let options: [NSAttributedString.DocumentReadingOptionKey: Any] = [.documentType: NSAttributedString.DocumentType.html, .characterEncoding: String.Encoding.utf8.rawValue]
         
@@ -19,7 +18,23 @@ func attributedTextFromHTML(_ html: String) -> AttributedString? {
                                                           
         return attributtedString
     } catch {
-        print("error attributed STring")
         return nil
     }
+}
+
+// Reproductor
+var timeHMSFormatter: DateComponentsFormatter = {
+    let formatter = DateComponentsFormatter()
+    formatter.unitsStyle = .positional
+    formatter.allowedUnits = [.minute,.second]
+    formatter.zeroFormattingBehavior = [.pad]
+    return formatter
+}()
+
+
+func formatSecondsToHMS(_ seconds: Double) -> String {
+    guard !seconds.isNaN, let text = timeHMSFormatter.string(from: seconds) else {
+        return "00:00"
+    }
+    return text
 }

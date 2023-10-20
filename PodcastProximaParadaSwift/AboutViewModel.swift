@@ -15,25 +15,9 @@ final class AboutViewModel:ObservableObject {
         self.network = network
     }
     
-    func fetchPageAboutMe() async -> AttributedString {
-        do {
-            let page = try await network.fetchJson(url: .aboutMe, type: APIPage.self)
-            
-            
-            if let content = attributedTextFromHTML(page.content.rendered) {
-                var result = content
-                result.font = .body
-                result.foregroundColor = Color.darkest
-                return result
-            } else {
-                return "**No Content**"
-            }
-        } catch {
-            return "**No Content**"
-        }
+    func aboutMe() async -> AttributedString {
+       await network.fetchPageContent(page: .aboutMe)
         
     }
-    
-
-    
+ 
 }

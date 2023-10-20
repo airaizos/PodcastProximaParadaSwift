@@ -23,7 +23,6 @@ extension Episodio {
     }
 }
 
-
 extension URL {
     static var previewLink = URL(string: "https://www.proximaparadaswift.dev/38-2/")!
 }

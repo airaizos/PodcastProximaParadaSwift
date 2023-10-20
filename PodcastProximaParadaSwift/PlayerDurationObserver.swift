@@ -9,6 +9,9 @@ import Foundation
 import Combine
 import AVFoundation
 
+/**
+ Muestra la duración de un audio
+ */
 final class PlayerDurationObserver {
     let publisher = PassthroughSubject<TimeInterval,Never>()
     

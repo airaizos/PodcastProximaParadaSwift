@@ -22,7 +22,7 @@ extension APIEpisodio {
     var categoriesString: String {
         categories.reduce("") { "\($0)-\($1)" }
     }
-    var episode: Episodio{
+    var episodio: Episodio {
         Episodio(id: id, title: title.rendered, content: content.rendered, categories: categories, categoriesString: categoriesString, link: link, date: date)
     }
 }

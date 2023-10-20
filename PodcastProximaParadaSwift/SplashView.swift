@@ -45,7 +45,7 @@ struct SplashView: View {
         .blendMode(.plusDarker)
         .onAppear {
             Task {
-                let epDescargados = try await vm.fetchEpisodes(episodes)
+                let epDescargados = await vm.fetchEpisodes(episodes)
                 
                 for episode in epDescargados {
                     if !episodes.contains(where: { $0.id == episode.id }) {

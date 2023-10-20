@@ -85,6 +85,7 @@ struct EpisodeDetailView: View {
                         Spacer()
                         Text(" \(vm.rate,format: .number.precision(.integerLength(1)))x")
                             .padding(.trailing,20)
+                            .monospacedDigit()
                             .foregroundStyle(vm.rate != 1 ? Color.pinkest : Color.clear1)
                         HStack(spacing: -13) {
                             

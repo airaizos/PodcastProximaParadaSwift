@@ -83,7 +83,7 @@ struct CategoriesView: View {
 }
 
 final class CategoriesViewModelMock: CategoriesViewModel {
-    override func fetchCategories() async throws -> [PostCategory] {
+    override func fetchCategories() async -> [PostCategory] {
         [PostCategory(id: 1, name: "Analogías", count: 3),PostCategory(id: 3, name: "episodios", count: 50),PostCategory(id: 4, name: "Repositorios", count: 3)]
     }
 }
@@ -97,7 +97,7 @@ struct CategoriesButtonTitleView: View {
     var body: some View {
         Button {
             Task {
-                let categories = try await vm.fetchCategories()
+                let categories = await vm.fetchCategories()
                 for category in categories {
                     context.insert(category)
                 }

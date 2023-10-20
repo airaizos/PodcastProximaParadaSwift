@@ -25,14 +25,14 @@ final class EpisodesListViewModel: ObservableObject {
         self.network = network
     }
     
-    func fetchEpisodes(_ episodes: [Episodio]) async throws -> [Episodio] {
+    func fetchEpisodes(_ episodes: [Episodio]) async -> [Episodio] {
         let lastEpisode = episodes.first?.id ?? 0
         
         do {
-            let lastPublishedEpisode = try await network.fetchJson(url: .lastPost, type: [APIEpisodio].self)
+            let lastPublishedEpisode = try await network.fetchJson(url: .lastEpisode, type: [APIEpisodio].self)
             if let recentId = lastPublishedEpisode.first?.id, recentId > lastEpisode {
                 
-                return try await network.fetchEpisodes()
+                return await network.fetchEpisodes()
             } else {
                 return []
             }

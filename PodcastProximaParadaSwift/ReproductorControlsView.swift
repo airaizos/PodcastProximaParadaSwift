@@ -8,6 +8,10 @@
 import SwiftUI
 import AVFoundation
 
+/**
+ Vista del Control de la reproducción del audio. Adelantar, barra de progreso y Retroceder
+ */
+
 struct ReproductorControlsView: View {
     let player: AVPlayer
     
@@ -36,9 +40,6 @@ struct ReproductorControlsView: View {
                 Text("")
             }
             .disabled(state != .playing)
-            
-            
-         
             
             Button {
                 goSeconds(.init(seconds: -30, preferredTimescale: 600))
@@ -95,24 +96,3 @@ struct ReproductorControlsView: View {
     }
     
 }
-    
-    //#Preview {
-    //    ReproductorView()
-    //}
-    
-    
-    var timeHMSFormatter: DateComponentsFormatter = {
-        let formatter = DateComponentsFormatter()
-        formatter.unitsStyle = .positional
-        formatter.allowedUnits = [.minute,.second]
-        formatter.zeroFormattingBehavior = [.pad]
-        return formatter
-    }()
-    
-    
-    func formatSecondsToHMS(_ seconds: Double) -> String {
-        guard !seconds.isNaN, let text = timeHMSFormatter.string(from: seconds) else {
-            return "00:00"
-        }
-        return text
-    }

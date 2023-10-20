@@ -9,6 +9,9 @@ import Foundation
 import Combine
 import AVFoundation
 
+/**
+ Actualiza que se esté reproduciendo algún item
+ */
 final class PlayerItemObserver {
     let publisher = PassthroughSubject<Bool,Never>()
     

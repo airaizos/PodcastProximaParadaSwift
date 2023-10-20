@@ -9,7 +9,10 @@ import Foundation
 import AVFoundation
 import Combine
 
-
+/**
+ Actualiza el avance de la reproducción en curso
+ 
+ */
 final class PlayerTimeObserver {
     let publisher =  PassthroughSubject<TimeInterval,Never>()
     
@@ -20,13 +23,15 @@ final class PlayerTimeObserver {
     init(player: AVPlayer) {
         self.player = player
         
-        
-        timeObservation =  player.addPeriodicTimeObserver(forInterval: CMTime(seconds: 0.5, preferredTimescale: 600), queue: nil) { [weak self] time in
+        timeObservation = player.addPeriodicTimeObserver(
+            forInterval: CMTime(
+                seconds: 0.5,
+                preferredTimescale: 600),
+            queue: nil) { [weak self] time in
             guard let self = self else { return }
             
             guard !self.paused else { return }
             self.publisher.send(time.seconds)
-
         }
     }
     

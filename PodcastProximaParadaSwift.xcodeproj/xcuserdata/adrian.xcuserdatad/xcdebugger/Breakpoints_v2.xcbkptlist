@@ -7,33 +7,49 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "AF942958-FEDF-42CA-8CEB-9344865CC3E8"
-            shouldBeEnabled = "Yes"
+            uuid = "E31D1EF2-2206-4660-B95E-E8E7F246BDB2"
+            shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "PodcastProximaParadaSwift/DetailEpisodeViewModel.swift"
+            filePath = "PodcastProximaParadaSwiftTests/DetailEpisodeVMTests.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "18"
-            endingLineNumber = "18"
-            landmarkName = "DetailEpisodeViewModel"
-            landmarkType = "3">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            uuid = "13F5E3A2-7A8C-43DF-BD43-17C9C99A656E"
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "PodcastProximaParadaSwiftTests/PodcastProximaParadaSwiftTests.swift"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "31"
-            endingLineNumber = "31"
-            landmarkName = "test_isDownloadingEpisodes_()"
+            startingLineNumber = "46"
+            endingLineNumber = "46"
+            landmarkName = "test_changeRate_initialRateShouldBeGrater()"
             landmarkType = "7">
+            <Locations>
+               <Location
+                  uuid = "E31D1EF2-2206-4660-B95E-E8E7F246BDB2 - c0500f14ebfab8ce"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "PodcastProximaParadaSwiftTests.DetailEpisodeVMTEsts.test_changeRate_initialRateShouldBeGrater() throws -&gt; ()"
+                  moduleName = "PodcastProximaParadaSwiftTests"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/adrian/MundoDev/Repositorios/PodcastProximaParadaSwift/PodcastProximaParadaSwiftTests/DetailEpisodeVMTests.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "47"
+                  endingLineNumber = "47"
+                  offsetFromSymbolStart = "528">
+               </Location>
+               <Location
+                  uuid = "E31D1EF2-2206-4660-B95E-E8E7F246BDB2 - c0500f14ebfab8ed"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "PodcastProximaParadaSwiftTests.DetailEpisodeVMTEsts.test_changeRate_initialRateShouldBeGrater() throws -&gt; ()"
+                  moduleName = "PodcastProximaParadaSwiftTests"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/adrian/MundoDev/Repositorios/PodcastProximaParadaSwift/PodcastProximaParadaSwiftTests/DetailEpisodeVMTests.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "46"
+                  endingLineNumber = "46"
+                  offsetFromSymbolStart = "508">
+               </Location>
+            </Locations>
          </BreakpointContent>
       </BreakpointProxy>
    </Breakpoints>

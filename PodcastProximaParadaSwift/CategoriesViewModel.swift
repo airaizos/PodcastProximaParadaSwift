@@ -14,13 +14,7 @@ class CategoriesViewModel: ObservableObject {
         self.network = network
     }
     
-    func fetchCategories() async throws -> [PostCategory] {
-       let apiCategories = try await network.fetchJson(url: URL.categoriesURL, type: [APIPostCategory].self)
-        
-        var categories = [PostCategory]()
-        for category in apiCategories {
-            categories.append(PostCategory(id:category.id, name: category.name, count: category.count))
-        }
-        return categories
+    func fetchCategories() async  -> [PostCategory] {
+        await network.fetchCategories()
     }
 }

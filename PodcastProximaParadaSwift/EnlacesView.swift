@@ -27,7 +27,7 @@ struct EnlacesView: View {
                 .padding(.horizontal)
                 .onAppear {
                     Task {
-                        text = await vm.fetchEnlaces()
+                        text = await vm.getEnlaces()
                     }
                 }
                 Divider()

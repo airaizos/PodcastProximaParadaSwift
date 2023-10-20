@@ -46,7 +46,7 @@ struct AboutView: View {
         }
         .onAppear {
             Task {
-                text = await vm.fetchPageAboutMe()
+                text = await vm.aboutMe()
             }
         }
     }
