@@ -300,7 +300,6 @@
 		3A2A542F2AE18A770089D1A9 /* LaunchScreen */ = {
 			isa = PBXGroup;
 			children = (
-				3A2A54302AE18C780089D1A9 /* SplashView.swift */,
 			);
 			name = LaunchScreen;
 			sourceTree = "<group>";
@@ -346,6 +345,7 @@
 		3A4974822ACD5272005890E5 /* PodcastProximaParadaSwift */ = {
 			isa = PBXGroup;
 			children = (
+				3AB442272B7E6EDD00E0275D /* LaunchScreen */,
 				3A4974832ACD5272005890E5 /* PodcastProximaParadaSwiftApp.swift */,
 				3A2A54322AE1917E0089D1A9 /* InitialView.swift */,
 				3AA900AB2AE1A49800431CD2 /* MainTabView.swift */,
@@ -462,6 +462,14 @@
 				3A32422F2ADFD97D00635879 /* StepperPPSStyle.swift */,
 			);
 			name = Styles;
+			sourceTree = "<group>";
+		};
+		3AB442272B7E6EDD00E0275D /* LaunchScreen */ = {
+			isa = PBXGroup;
+			children = (
+				3A2A54302AE18C780089D1A9 /* SplashView.swift */,
+			);
+			path = LaunchScreen;
 			sourceTree = "<group>";
 		};
 		3ACA32242AD3436800CC28B7 /* Subviews */ = {
