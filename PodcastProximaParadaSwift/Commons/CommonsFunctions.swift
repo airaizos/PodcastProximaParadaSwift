@@ -7,7 +7,7 @@
 
 import Foundation
 
-// Content
+///Convierte de un html a un AttributedString
 func attributedTextFromHTML(_ html: String) -> AttributedString? {
     guard let data = html.data(using: .utf8) else { return nil }
     
